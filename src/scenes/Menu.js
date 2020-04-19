@@ -13,14 +13,16 @@ class Menu extends Phaser.Scene {
     create() {
       //menu display
       let menuConfig = {
-          fontFamily: 'Courier',
+          fontFamily: 'Impact',
           fontSize: '28px',
-          backgroundColor: '#F3B141',
-          color: '#843605',
+          backgroundColor: '#ff1c1c',
+          color: '#fff700',
           align: 'right',
           padding: {
-              top: 5,
-              bottom: 5,
+              top: 15,
+              bottom: 15,
+              left: 15,
+              right: 15
           },
           fixedwidth: 0,
       }
@@ -31,7 +33,6 @@ class Menu extends Phaser.Scene {
       let textSpacer = 64;
       this.add.text(centerX, centerY - textSpacer, 'HOTDOG HELL', menuConfig).setOrigin(0.5);
       this.add.text(centerX, centerY, 'P1 use ←→ to move & (↑) to fire\nP2 use A & D to move & W to fire', menuConfig).setOrigin(0.5);
-      //menuConfig.backgroundColor = '#00FF00';
       this.add.text(centerX, centerY + textSpacer, 'Press ← for EASY or → for HARD', menuConfig).setOrigin(0.5);
       
       //define keys
