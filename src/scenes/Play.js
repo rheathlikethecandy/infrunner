@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('mustard', './assets/mustard.png');
         this.load.image('spaceship', './assets/hotdog.png');
         this.load.image('starfield', './assets/counter.png');
+        this.load.image('goldendog', './assets/goldendog.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/eating.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
@@ -33,10 +34,11 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new RocketOne(this, game.config.width/2 - 8, 431, 'rocket').setScale(1, 1).setOrigin(0, 0);
         this.p2Rocket = new RocketTwo(this, game.config.width/2 - 8, 431, 'mustard').setScale(1, 1).setOrigin(0, 0);
         // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + 192, 132, 'spaceship', 0, 30).setOrigin(0,0);
-        this.ship02 = new Spaceship(this, game.config.width + 96, 196, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, 260, 'spaceship', 0, 10).setOrigin(0,0);
-        this.shipArray = [this.ship01,this.ship02,this.ship03];
+        this.ship01 = new Spaceship(this, game.config.width + 192, 140, 'spaceship', 0, 30).setOrigin(0,0);
+        this.ship02 = new Spaceship(this, game.config.width + 96, 210, 'spaceship', 0, 20).setOrigin(0,0);
+        this.ship03 = new Spaceship(this, game.config.width, 280, 'spaceship', 0, 10).setOrigin(0,0);
+        this.goldendog = new Spaceship(this, game.config.width, 175, 'goldendog', 0, 100).setScale(0.5,0.5).setOrigin(0,0);
+        this.shipArray = [this.ship01,this.ship02,this.ship03,this.goldendog];
         //define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -93,15 +95,16 @@ class Play extends Phaser.Scene {
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
+            this.goldendog.update();
         }
         //check collisions
-        for(var i = 0; i < 3; i++) {
+        for(var i = 0; i < 4; i++) {
             if(this.checkCollision(this.p1Rocket, this.shipArray[i])) {
                 this.p1Rocket.reset();
                 this.shipExplode(this.shipArray[i]);
             }
         }
-        for(var j = 0; j < 3; j++) {
+        for(var j = 0; j < 4; j++) {
             if(this.checkCollision(this.p2Rocket, this.shipArray[j])) {
                 this.p2Rocket.reset();
                 this.shipExplode(this.shipArray[j]); 
