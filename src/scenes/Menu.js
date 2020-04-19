@@ -7,34 +7,36 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_select', './assets/select.wav');
         this.load.audio('sfx_explosion', './assets/chomp.wav');
         this.load.audio('sfx_rocket', './assets/squirt.wav');
+        //load background
+        this.load.image('background', './assets/background.png');
     }
     create() {
-        //menu display
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedwidth: 0,
-        }
-
-        //show menu text
-        let centerX = game.config.width/2;
-        let centerY = game.config.height/2;
-        let textSpacer = 64;
-        this.add.text(centerX, centerY - textSpacer, 'HOTDOG HELL', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'P1 use ←→ to move & (↑) to fire, P2 use A, D, and W', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        this.add.text(centerX, centerY + textSpacer, 'Press ← for EASY or → for HARD', menuConfig).setOrigin(0.5);
-        
-        //define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+      //menu display
+      let menuConfig = {
+          fontFamily: 'Courier',
+          fontSize: '28px',
+          backgroundColor: '#F3B141',
+          color: '#843605',
+          align: 'right',
+          padding: {
+              top: 5,
+              bottom: 5,
+          },
+          fixedwidth: 0,
+      }
+      this.background = this.add.tileSprite(0,0,640,480, 'background').setOrigin(0,0);
+      //show menu text
+      let centerX = game.config.width/2;
+      let centerY = game.config.height/2;
+      let textSpacer = 64;
+      this.add.text(centerX, centerY - textSpacer, 'HOTDOG HELL', menuConfig).setOrigin(0.5);
+      this.add.text(centerX, centerY, 'P1 use ←→ to move & (↑) to fire\nP2 use A & D to move & W to fire', menuConfig).setOrigin(0.5);
+      //menuConfig.backgroundColor = '#00FF00';
+      this.add.text(centerX, centerY + textSpacer, 'Press ← for EASY or → for HARD', menuConfig).setOrigin(0.5);
+      
+      //define keys
+      keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+      keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
     update() {
