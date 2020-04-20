@@ -11,7 +11,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         //move spaceship left
         this.x -= game.settings.spaceshipSpeed * Math.random((1.5 - 0.5) + (0.5));
         if(this.points > 30) {
-            this.x -= 4;
+            this.x -= 2;
         }
         //wrap from left to right
         if(this.x <= 0-this.width) {
