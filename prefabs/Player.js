@@ -6,17 +6,25 @@ class Player extends Phaser.GameObjects.Sprite {
         //add object to existing scene
         scene.add.existing(this);
         //action state
-        this.isJump = false;
         this.isSlide = false;
         this.hasDjump = true;
-        this.sfxRocket = scene.sound.add('sfx_rocket'); //add rocket sfx
+        this.yVel = 0;
+        this.sfxJump = scene.sound.add('sfx_jump'); //add landing sfx
+        this.sfxLand = scene.sound.add('sfx_land'); //add landing sfx
+        this.sfxSlide = scene.sound.add('sfx_slide'); //add landing sfx
     }
     update() {
         if(keyUP.isDown || keyW.isDown) {
-            this.isJump = true;
+            yVel = 50;
+            this.sfxJump.play();
         }
         if(keyDOWN.isDown || keyS.isDown) {
             this.isSlide = true;
+            this.sfxSlide.play();
         }
+        if(yVel > 0) {
+            yVel--;
+        }
+        this.y = this.y + this.yVel;
     }
 }
