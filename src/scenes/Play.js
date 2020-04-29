@@ -94,7 +94,9 @@ class Play extends Phaser.Scene {
         if (this.gameOver) {
             this.scene.start("endScene");
         }
-        this.backDrop.tilePositionX -= 4;
+        if(!this.gameOver) {
+            this.backDrop.tilePositionX -= 4;
+        }
         if(!this.gameOver) {
             //update rocket
             this.player.update();
