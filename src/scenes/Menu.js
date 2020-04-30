@@ -10,8 +10,12 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_slide', './assets/slide.wav');
         this.load.audio('sfx_siren', './assets/siren.wav');
         
-        this.load.image('backDrop', './assets/backDrop.png');
-        this.load.image('menu', './assets/infMenu.png');
+        // this.load.image('backDrop', './assets/backDrop.png');
+        // //image for menue background **PLACEHOLDER FOR NOW
+        // this.load.image('menu', './assets/infMenu.png');
+        
+        
+
     }
     create() {
         let centerX = game.config.width/2;
@@ -25,7 +29,7 @@ class Menu extends Phaser.Scene {
         let menuConfig= {
             frontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor:'#00000',
+            backgroundColor:'#1F46EB',
             colo:'#FFFFFF',
             align:'right',
             padding:{
@@ -34,9 +38,22 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth:0
         }
-        this.add.text(centerX,centerY,'InfRunner-PlaceHolderName', menuConfig).setOrigin(0.5);
+
+        //creating a menu button to move to the play scene
+        this.menuButton = this.add.text(centerX,centerY,'InfRunner-PlaceHolderName',
+                                        menuConfig).setOrigin(0.5);
+        this.menuButton.setInteractive({
+            useHandCursor: true,
+        });
+      
+       
     }
       
     update() {
+          // start play scene when menu button is being pressed/clicked
+          this.input.on('gameobjectdown', (pointer, gameObject, event) => {
+            console.log('nextscene');
+             this.scene.start("playScene");
+         });
     }
 }
