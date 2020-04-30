@@ -6,6 +6,15 @@ class SlideObstacle extends Phaser.GameObjects.Sprite {
       scene.add.existing(this);
     }
     update() {
+         //moving from left to right by john 4/29/2020
+         this.x -= game.settings.objSpeed; 
+      
+         //reset position to og position by john 4/29/2020
+         if(this.x <= 0 - this.width){
+           this.reset(); 
+   //testing
+   
+         }
     }
     reset(x, y) {
         this.x = x;

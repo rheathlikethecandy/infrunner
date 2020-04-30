@@ -100,7 +100,7 @@ class Play extends Phaser.Scene {
         if(!this.gameOver) {
             //update rocket
             this.player.update();
-            for(int i = 0; i < 0; i++) {
+            for(var i = 0; i < 0; i++) {
                 this.checkCollision(this.player, jumps[i]);
                 this.checkCollision(this.player, slides[i]);
                 this.checkCollision(this.player, pit);
