@@ -20,8 +20,23 @@ class Menu extends Phaser.Scene {
         //define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-    }
 
+        //place holder title
+        let menuConfig= {
+            frontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor:'#00000',
+            colo:'#FFFFFF',
+            align:'right',
+            padding:{
+                top:5,
+                bottom:5,
+            },
+            fixedWidth:0
+        }
+        this.add.text(centerX,centerY,'InfRunner-PlaceHolderName', menuConfig).setOrigin(0.5);
+    }
+      
     update() {
     }
 }
