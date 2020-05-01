@@ -5,15 +5,16 @@ class Play extends Phaser.Scene {
     preload() {
         //load images/tile sprites
         this.load.image('backDrop', './assets/backDrop.png');
+        this.load.image('building', './assets/building.png');
         // load spritesheet
-        this.load.spritesheet('dieAnim', './assets/deathAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('dieAnim', './assets/running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     create() {
         //place tile sprite
         this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'backDrop').setOrigin(0, 0);
         //add player
-        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, game.config.height * 0.7, "player");
-        this.player.setGravityY(gameOptions.playerGravity);
+        this.player = this.physics.add.sprite(0, 0, "player");
+        this.player.setGravityY(50);
         //add death pit at bottom
         this.pit = new Pit();
         // add buildings (x3)
@@ -73,13 +74,17 @@ class Play extends Phaser.Scene {
             }
             //check collision
             for(var j = 0; j < 3; j++) {
-                if(this.checkCollision(this.player, jumps[i])) {
+                if(this.checkCollision(this.player, jumps[j])) {
                     this.gameOver = true;
                 }
                 if(this.checkCollision(this.player, pit) {
                     this.gameOver = true;
                 }
             }
+        }
+        for(var x = 0; x < 3; x++) {
+            this.jumps[x].update();
+            this.buildings[x].update();
         }
     }
     checkCollision(player, collide) {
