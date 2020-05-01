@@ -54,6 +54,9 @@ class Play extends Phaser.Scene {
         this.gameOver = false;
     }
     update() {
+        //create a scrolling background
+        this.backDrop.tilePositionX -=4;
+        
         //check key input for restart
         if (this.gameOver) {
             this.scene.start("endScene");
@@ -64,7 +67,12 @@ class Play extends Phaser.Scene {
         if(!this.gameOver) {
             //update rocket
             this.player.update();
-            for(int i = 0; i < 3; i++) {
+            for(var i = 0; i < 3; i++) {
+                this.jumps[i].update();
+                this.buildings[i].update();
+            }
+            //check collision
+            for(var i = 0; i < 3; i++) {
                 this.checkCollision(this.player, jumps[i]);
                 this.checkCollision(this.player, pit);
             }
