@@ -20,7 +20,5 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.y -= 10;
             this.sfxJet.volume(0);
         }
-    
-        
     }
 }
