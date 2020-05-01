@@ -18,17 +18,17 @@ class Play extends Phaser.Scene {
         this.pit = new Pit();
         // add buildings (x3)
         this.build1 = new Building(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.build2 = new Building(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.build3 = new Building(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
+        this.build2 = new Building(this, 0, 0, 'building', 0, 20).setOrigin(0,0);
+        this.build3 = new Building(this, 0, 0, 'building', 0, 10).setOrigin(0,0);
         var buildings = [
             this.build1,
             this.build2,
             this.build3
         ]
         // add jumps (x3)
-        this.jump1 = new JumpObstacle(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.jump2 = new JumpObstacle(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.jump3 = new JumpObstacle(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
+        this.jump1 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 30).setOrigin(0,0);
+        this.jump2 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 20).setOrigin(0,0);
+        this.jump3 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 10).setOrigin(0,0);
         var jumps = [
             this.jump1,
             this.jump2,
