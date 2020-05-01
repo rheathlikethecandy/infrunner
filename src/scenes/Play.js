@@ -88,7 +88,7 @@ class Play extends Phaser.Scene {
                 if(this.checkCollision(this.player, jumps[j])) {
                     this.gameOver = true;
                 }
-                if(this.checkCollision(this.player, pit) {
+                if(this.checkCollision(this.player, pit)) {
                     this.gameOver = true;
                 }
             }

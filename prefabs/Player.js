@@ -9,9 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.isSlide = false;
         this.hasDjump = true;
         this.yVel = 0;
-        this.sfxJet = new Phaser.Sound(game, 'sfx_jet', 1, true);
-        this.sfxJet.play();
-        
+        this.sfxJet = new Sound(game, 'sfx_jet', 0, true);
     }
     update() {
         if(keyUP.isDown || keyW.isDown) {
