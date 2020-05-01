@@ -83,8 +83,10 @@ class Play extends Phaser.Scene {
             }
         }
         for(var x = 0; x < 3; x++) {
-            this.jumps[x].update();
-            this.buildings[x].update();
+            
+            if(this.buildings[x] < 0) {
+                reset(this.jumps[x], this.buildings[x]);
+            }
         }
     }
     checkCollision(player, collide) {
@@ -97,5 +99,12 @@ class Play extends Phaser.Scene {
         } else {
             return false;
         }
+    }
+    reset(jumpObj, building) {
+        building.x = 640;
+        jumpObj.x = 640 + (Math.random() * 50);
+        var height = 50 + (Math.random() * 300);
+        building.y = height;
+        jumpObj.y = height;
     }
 }
