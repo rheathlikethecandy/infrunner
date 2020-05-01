@@ -9,22 +9,12 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isSlide = false;
         this.hasDjump = true;
         this.yVel = 0;
-        this.sfxJump = scene.sound.add('sfx_jump'); //add landing sfx
-        this.sfxLand = scene.sound.add('sfx_land'); //add landing sfx
-        this.sfxSlide = scene.sound.add('sfx_slide'); //add landing sfx
+        this.sfxJump = scene.sound.add('sfx_jet'); //add landing sfx
     }
     update() {
         if(keyUP.isDown || keyW.isDown) {
-            yVel = 50;
-            this.sfxJump.play();
+            this.y += 10;
+            this.sfxJet.play();
         }
-        if(keyDOWN.isDown || keyS.isDown) {
-            this.isSlide = true;
-            this.sfxSlide.play();
-        }
-        if(yVel > 0) {
-            yVel--;
-        }
-        this.y = this.y + this.yVel;
     }
 }

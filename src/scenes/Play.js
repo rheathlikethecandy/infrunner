@@ -12,7 +12,8 @@ class Play extends Phaser.Scene {
         //place tile sprite
         this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'backDrop').setOrigin(0, 0);
         //add player
-        this.player = new Player(this, game.config.width/2 - 8, 431, 'player').setScale(0.5, 0.5).setOrigin(0, 0);
+        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, game.config.height * 0.7, "player");
+        this.player.setGravityY(gameOptions.playerGravity);
         //add death pit at bottom
         this.pit = new Pit();
         // add buildings (x3)
@@ -33,36 +34,15 @@ class Play extends Phaser.Scene {
             this.jump2,
             this.jump3
         ]
-        // add slides (x3)
-        this.slide1 = new SlideObstacle(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.slide2 = new SlideObstacle(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.slide3 = new SlideObstacle(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
-        var slides = [
-            this.slide1,
-            this.slide2,
-            this.slide3
-        ]
         
         //define keys
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
         // animation config
         this.anims.create({
-            key: 'jump',
-            frames: this.anims.generateFrameNumbers('jumpAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
-        });
-        this.anims.create({
-            key: 'land',
-            frames: this.anims.generateFrameNumbers('landAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
-        });
-        this.anims.create({
-            key: 'slide',
-            frames: this.anims.generateFrameNumbers('slideAnim', { start: 0, end: 9, first: 0}),
+            key: 'jet',
+            frames: this.anims.generateFrameNumbers('jetAnim', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
         this.anims.create({
@@ -70,22 +50,6 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('dieAnim', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-        //score var
-        this.score = 0;
-        //score display
-        let scoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.scoreLeft = this.add.text(69, 54, this.score, scoreConfig);
         //game over flag
         this.gameOver = false;
     }
@@ -100,9 +64,8 @@ class Play extends Phaser.Scene {
         if(!this.gameOver) {
             //update rocket
             this.player.update();
-            for(int i = 0; i < 0; i++) {
+            for(int i = 0; i < 3; i++) {
                 this.checkCollision(this.player, jumps[i]);
-                this.checkCollision(this.player, slides[i]);
                 this.checkCollision(this.player, pit);
             }
         }
