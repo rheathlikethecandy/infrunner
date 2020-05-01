@@ -9,12 +9,18 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isSlide = false;
         this.hasDjump = true;
         this.yVel = 0;
-        this.sfxJump = scene.sound.add('sfx_jet'); //add landing sfx
+        this.sfxJet = new Phaser.Sound(game, 'sfx_jet', 1, true);
+        this.sfxJet.play();
+        
     }
     update() {
         if(keyUP.isDown || keyW.isDown) {
             this.y += 10;
-            this.sfxJet.play();
+            this.sfxJet.volume(1);
+        }
+        else if(!keyUP.isDown && !keyW.isDown) {
+            this.y -= 10;
+            this.sfxJet.volume(0);
         }
     }
 }
