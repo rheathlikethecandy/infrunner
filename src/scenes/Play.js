@@ -3,18 +3,22 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
     preload() {
-        //load images/tile sprites
-        this.load.image('backDrop', './assets/backDrop.png');
-        // load spritesheet
-        this.load.spritesheet('dieAnim', './assets/deathAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        // //load images/tile sprites
+        // this.load.image('backDrop', './assets/backDrop.png');
+        // // load spritesheet
+        // this.load.spritesheet('dieAnim', './assets/deathAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.path = "assets/";
+        this.load.image('playerSprite','placeHolderSprite.png');
+        this.load.image('background','placeHolderBackground.png');
+
     }
+    
     create() {
         //place tile sprite
-        this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'backDrop').setOrigin(0, 0);
+        this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
         //add player
-        this.player = new Player(this, game.config.width/2 - 8, 431, 'player').setScale(0.5, 0.5).setOrigin(0, 0);
-        //add death pit at bottom
-        this.pit = new Pit();
+        this.player = new Player(this, game.config.width/2 - 8, 300, 'playerSprite').setScale(0.5, 0.5).setOrigin(0, 0);
+        
         // add buildings (x3)
         this.build1 = new Building(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
         this.build2 = new Building(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
@@ -44,10 +48,10 @@ class Play extends Phaser.Scene {
         ]
         
         //define keys
-        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 
         // animation config
         this.anims.create({
@@ -88,11 +92,20 @@ class Play extends Phaser.Scene {
         this.scoreLeft = this.add.text(69, 54, this.score, scoreConfig);
         //game over flag
         this.gameOver = false;
+        //vector variable
+        this.ACCELERATION = 1500;
+        this.MAX_Y_VEL = 5000;
+        this.JUMP_VELOCITY = -700;
+
+        //create a physics collider  with buildings
+        this.physics.add.collider(this.player, this.buildings);
+
+
     }
     update() {
         //create a scrolling background
         this.backDrop.tilePositionX -=4;
-        
+
         //check key input for restart
         if (this.gameOver) {
             this.scene.start("endScene");

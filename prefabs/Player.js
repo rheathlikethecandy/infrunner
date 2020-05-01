@@ -1,5 +1,5 @@
 //Player prefab
-class Player extends Phaser.GameObjects.Sprite {
+class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -9,14 +9,30 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isJump = false;
         this.isSlide = false;
         this.hasDjump = true;
-        this.sfxRocket = scene.sound.add('sfx_rocket'); //add rocket sfx
+       
     }
     update() {
-        if(keyUP.isDown || keyW.isDown) {
-            this.isJump = true;
+        // if(keyUP.isDown || keyW.isDown) {
+        //     this.isJump = true;
+        // }
+        // if(keyDOWN.isDown || keyS.isDown) {
+        //     this.isSlide = true;
+        // }
+
+        //basic movement
+        
+        if(keyLEFT.isDown&& this.x >= 47|| this.isJump == false){
+                this.x -= 12;
+        }else if(keyRIGHT.isDown && this.x <= 598||this.isJump == false){
+                this.x += 12;
         }
-        if(keyDOWN.isDown || keyS.isDown) {
-            this.isSlide = true;
+        //jumping 
+        if(keyUP.isDown&&this.y >= 0 -this.width || this.isJump == false){
+            this.body.velocity.y = this.JUMP_VELOCITY;
+	        this.jumping = true;
+
         }
+    
+        
     }
 }
