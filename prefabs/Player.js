@@ -6,31 +6,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //add object to existing scene
         scene.add.existing(this);
         //action state
-        this.isJump = false;
         this.isSlide = false;
         this.hasDjump = true;
-       
+        this.yVel = 0;
+        this.sfxJet = new Phaser.Sound(game, 'sfx_jet', 1, true);
+        this.sfxJet.play();
+        
     }
     update() {
-        // if(keyUP.isDown || keyW.isDown) {
-        //     this.isJump = true;
-        // }
-        // if(keyDOWN.isDown || keyS.isDown) {
-        //     this.isSlide = true;
-        // }
-
-        //basic movement
-        
-        if(keyLEFT.isDown&& this.x >= 47|| this.isJump == false){
-                this.x -= 12;
-        }else if(keyRIGHT.isDown && this.x <= 598||this.isJump == false){
-                this.x += 12;
+        if(keyUP.isDown || keyW.isDown) {
+            this.y += 10;
+            this.sfxJet.volume(1);
         }
-        //jumping 
-        if(keyUP.isDown&&this.y >= 0 -this.width || this.isJump == false){
-            this.body.velocity.y = this.JUMP_VELOCITY;
-	        this.jumping = true;
-
+        else if(!keyUP.isDown && !keyW.isDown) {
+            this.y -= 10;
+            this.sfxJet.volume(0);
         }
     
         

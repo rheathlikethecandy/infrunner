@@ -3,70 +3,49 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
     preload() {
-        // //load images/tile sprites
-        // this.load.image('backDrop', './assets/backDrop.png');
-        // // load spritesheet
-        // this.load.spritesheet('dieAnim', './assets/deathAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
-        this.load.path = "assets/";
-        this.load.image('playerSprite','placeHolderSprite.png');
-        this.load.image('background','placeHolderBackground.png');
-
+        //load images/tile sprites
+        this.load.image('backDrop', './assets/backDrop.png');
+        this.load.image('building', './assets/building.png');
+        this.load.image('jumpObs', './assets/jumpObs.png');
+        // load spritesheet
+        this.load.spritesheet('dieAnim', './assets/running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     
     create() {
         //place tile sprite
         this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
         //add player
-        this.player = new Player(this, game.config.width/2 - 8, 300, 'playerSprite').setScale(0.5, 0.5).setOrigin(0, 0);
-        
+        this.player = this.physics.add.sprite(0, 0, "player");
+        this.player.setGravityY(50);
+        //add death pit at bottom
+        this.pit = new Pit();
         // add buildings (x3)
         this.build1 = new Building(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.build2 = new Building(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.build3 = new Building(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
+        this.build2 = new Building(this, 0, 0, 'building', 0, 20).setOrigin(0,0);
+        this.build3 = new Building(this, 0, 0, 'building', 0, 10).setOrigin(0,0);
         var buildings = [
             this.build1,
             this.build2,
             this.build3
         ]
         // add jumps (x3)
-        this.jump1 = new JumpObstacle(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.jump2 = new JumpObstacle(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.jump3 = new JumpObstacle(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
+        this.jump1 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 30).setOrigin(0,0);
+        this.jump2 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 20).setOrigin(0,0);
+        this.jump3 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 10).setOrigin(0,0);
         var jumps = [
             this.jump1,
             this.jump2,
             this.jump3
         ]
-        // add slides (x3)
-        this.slide1 = new SlideObstacle(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.slide2 = new SlideObstacle(this, 0, 0, 'building2', 0, 20).setOrigin(0,0);
-        this.slide3 = new SlideObstacle(this, 0, 0, 'building3', 0, 10).setOrigin(0,0);
-        var slides = [
-            this.slide1,
-            this.slide2,
-            this.slide3
-        ]
         
         //define keys
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
         // animation config
         this.anims.create({
-            key: 'jump',
-            frames: this.anims.generateFrameNumbers('jumpAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
-        });
-        this.anims.create({
-            key: 'land',
-            frames: this.anims.generateFrameNumbers('landAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
-        });
-        this.anims.create({
-            key: 'slide',
-            frames: this.anims.generateFrameNumbers('slideAnim', { start: 0, end: 9, first: 0}),
+            key: 'jet',
+            frames: this.anims.generateFrameNumbers('jetAnim', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
         this.anims.create({
@@ -74,22 +53,6 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('dieAnim', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-        //score var
-        this.score = 0;
-        //score display
-        let scoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.scoreLeft = this.add.text(69, 54, this.score, scoreConfig);
         //game over flag
         this.gameOver = false;
         //vector variable
@@ -116,17 +79,24 @@ class Play extends Phaser.Scene {
         if(!this.gameOver) {
             //update rocket
             this.player.update();
-            for(var i = 0; i < 0; i++) {
-                this.slides[i].update();
+            for(var i = 0; i < 3; i++) {
                 this.jumps[i].update();
                 this.buildings[i].update();
             }
-
             //check collision
-            for(var i = 0; i < 0; i++) {
-                this.checkCollision(this.player, jumps[i]);
-                this.checkCollision(this.player, slides[i]);
-                this.checkCollision(this.player, pit);
+            for(var j = 0; j < 3; j++) {
+                if(this.checkCollision(this.player, jumps[j])) {
+                    this.gameOver = true;
+                }
+                if(this.checkCollision(this.player, pit) {
+                    this.gameOver = true;
+                }
+            }
+        }
+        for(var x = 0; x < 3; x++) {
+            
+            if(this.buildings[x] < 0) {
+                reset(this.jumps[x], this.buildings[x]);
             }
         }
     }
@@ -140,5 +110,12 @@ class Play extends Phaser.Scene {
         } else {
             return false;
         }
+    }
+    reset(jumpObj, building) {
+        building.x = 640;
+        jumpObj.x = 640 + (Math.random() * 50);
+        var height = 50 + (Math.random() * 300);
+        building.y = height;
+        jumpObj.y = height;
     }
 }
