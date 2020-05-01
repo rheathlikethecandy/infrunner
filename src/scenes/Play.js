@@ -72,7 +72,7 @@ class Play extends Phaser.Scene {
                 this.buildings[i].update();
             }
             //check collision
-            for(var i = 0; i < 3; i++) {
+            for(var j = 0; j < 3; j++) {
                 this.checkCollision(this.player, jumps[i]);
                 this.checkCollision(this.player, pit);
             }
