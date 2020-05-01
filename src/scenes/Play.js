@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
         //load images/tile sprites
         this.load.image('backDrop', './assets/backDrop.png');
         this.load.image('building', './assets/building.png');
+        this.load.image('jumpObs', './assets/jumpObs.png');
         // load spritesheet
         this.load.spritesheet('dieAnim', './assets/running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
