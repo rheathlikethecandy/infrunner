@@ -31,28 +31,17 @@ class Play extends Phaser.Scene {
         // variables
         this.timer = Phaser.Time.TimerEvent;
         this.score = 0;
-        this.scoreText = this.add.text("playScene", 0, 0, "");
+        this.scoreText = this.add.text(0, 0, '0', {
+            fontFamily: 'Arial Black',
+            fontSize: 10,
+            color: '#fff',
+            stroke: '#da0050',
+            strokeThickness: 4,
+        });
 
         for (var i = 0; i < 2; i += 1) {
             this.buildings.create(i * 380, 590, 'building');
         }
-        this.buildings;
-
-        this.scoreText.push(
-            this.add.text(this.sys.canvas.width / 2 - 14, 30, "0", {
-                fontFamily: "Aerial",
-                fontSize: "40px",
-                fill: "#000"
-            })
-        );
-        this.scoreText.push(
-            this.add.text(this.sys.canvas.width / 2 - 16, 30, "0", {
-                fontFamily: "Aerial",
-                fontSize: "40px",
-                fill: "#fff"
-            })
-        );
-
         this.addWorld();
 
         this.player = new Player({
