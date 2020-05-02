@@ -63,7 +63,10 @@ class Play extends Phaser.Scene {
         //create a physics collider  with buildings
         this.physics.add.collider(this.player, this.buildings);
 
-
+        text = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
+            font: "64px Arial", fill: "#ffffff", align: "center" });
+        text.anchor.setTo(0.5, 0.5);
+        game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
     }
     update() {
         //create a scrolling background
@@ -117,5 +120,9 @@ class Play extends Phaser.Scene {
         var height = 50 + (Math.random() * 300);
         building.y = height;
         jumpObj.y = height;
+    }
+    function updateScore() {
+        this.score++;
+        text.setText('Score: ' + score);
     }
 }
