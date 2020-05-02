@@ -1,3 +1,5 @@
+var obstacles;
+var buildings;
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -12,12 +14,12 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
         this.load.audio('sfx_jet','jet.wav');
         this.load.audio('sfx_siren','siren.wav');
-        this.load.audio('sfx_slide','slide.wav');
         this.load.audio('sfx_boop','boop.wav');
 
     }
     
     create() {
+<<<<<<< HEAD
          //create scrolling tile
          this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
          //this.backgroundCloud.depth = 4
@@ -59,18 +61,37 @@ class Play extends Phaser.Scene {
         //define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+=======
+        //place tile sprite
+        this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
+>>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
 
-        // animation config
-        this.anims.create({
-            key: 'jet',
-            frames: this.anims.generateFrameNumbers('jetAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
+        this.obstacles = this.physics.add.group();
+        this.buildings = this.physics.add.staticGroup();
+        
+        // variables
+        this.timer = Phaser.Time.TimerEvent;
+        this.score = 0;
+        this.scoreText = this.add.text(0, 0, '0', {
+            fontFamily: 'Arial Black',
+            fontSize: 10,
+            color: '#fff',
+            stroke: '#da0050',
+            strokeThickness: 4,
         });
-        this.anims.create({
-            key: 'die',
-            frames: this.anims.generateFrameNumbers('dieAnim', { start: 0, end: 9, first: 0}),
-            frameRate: 30
+
+        for (var i = 0; i < 2; i += 1) {
+            this.buildings.create(i * 380, 590, 'building');
+        }
+        this.addWorld();
+
+        this.player = new Player({
+            scene: this, 
+            x: 20, 
+            y: 275, 
+            key: "playerSprite", 
         });
+<<<<<<< HEAD
          this.anims.create(
             {
                 key: 'run',
@@ -86,16 +107,29 @@ class Play extends Phaser.Scene {
         this.ACCELERATION = 1500;
         this.MAX_Y_VEL = 5000;
         this.JUMP_VELOCITY = -700;
+=======
+>>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
 
-        //create a physics collider  with buildings
+        this.player.play('run');
+        
         this.physics.add.collider(this.player, this.buildings);
+        this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
 
+<<<<<<< HEAD
          //play run animation
         this.player.play('run');   
         text = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
             font: "64px Arial", fill: "#ffffff", align: "center" });
         text.anchor.setTo(0.5, 0.5);
         game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
+=======
+        this.timer = this.time.addEvent({
+            delay: 2500,
+            callback: this.addWorld,
+            callbackScope: this,
+            loop: true
+        });
+>>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
     }
 
 
@@ -103,47 +137,12 @@ class Play extends Phaser.Scene {
         //create a scrolling background
         this.backDrop.tilePositionX -=4;
 
-        //check key input for restart
-        if (this.gameOver) {
-            this.scene.start("endScene");
-        }
-        if(!this.gameOver) {
-            this.backDrop.tilePositionX -= 4;
-        }
-        if(!this.gameOver) {
-            //update rocket
-            this.player.update();
-            for(var i = 0; i < 3; i++) {
-                this.jumps[i].update();
-                this.buildings[i].update();
-            }
-            // //check collision
-            // for(var j = 0; j < 3; j++) {
-            //     if(this.checkCollision(this.player, jumps[j])) {
-            //         this.gameOver = true;
-            //     }
-            //     if(this.checkCollision(this.player, pit) {
-            //         this.gameOver = true;
-            //     }
-            // }
-        }
-        for(var x = 0; x < 3; x++) {
-            
-            if(this.buildings[x] < 0) {
-                reset(this.jumps[x], this.buildings[x]);
-            }
-        }
     }
-    checkCollision(player, collide) {
-        //simple AABB checking
-        if (player.x < collide.x + collide.width && 
-            player.x + player.width > collide.x && 
-            player.y < collide.y + collide.height &&
-            player.height + player.y > collide. y) {
-                return true;
-        } else {
-            return false;
-        }
+    addWorld() {
+
+    }
+    onHit() {
+        this.player.setDead(true);
     }
     reset(jumpObj, building) {
         building.x = 640;

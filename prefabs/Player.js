@@ -1,17 +1,24 @@
 //Player prefab
 class Player extends Phaser.GameObjects.Sprite {
+<<<<<<< HEAD
     
+=======
+>>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
+
+        var jumpKey =  Phaser.Input.Keyboard.Key;
+        var isDead = boolean = false;
+        var jumps = number = 2;
 
         this.setScale(1);
         this.setOrigin(0, 0);
 
         this.scene.anims.create({
-            key: 'walk',
-            frames: this.scene.anims.generateFrameNames('walkSprite',
+            key: 'run',
+            frames: this.scene.anims.generateFrameNames('runSprite',
             {
-              prefix: 'walk_cycle',
+              prefix: 'run_cycle',
               start: 1,
               end: 10,
               zeroPad: 0
@@ -31,12 +38,42 @@ class Player extends Phaser.GameObjects.Sprite {
         //add object to existing scene
         scene.add.existing(this);
     }
+    
     update() {
         this.processInput();
         this.outOfBounds();
     }
 
+<<<<<<< HEAD
    
 
    
+=======
+    processInput() {
+        if(this.body.touching.down) {
+            this.jumps = 2;
+        }
+        if(this.jumpKey.isDown && this.jumps > 0) {
+            this.jump();
+        }
+    }
+    jump() {
+        this.jumps -= 1;
+        this.body.setVelocityY(-50);
+        console.log(this.jumps);
+    }
+    outOfBounds() {
+        if (this.y + this.height > this.scene.sys.canvas.height || this.y + this.height < 0) {
+            this.isDead = true;
+        }
+    }
+    
+    getDead() {
+        return this.isDead;
+    }
+
+    setDead(dead) {
+        this.isDead = dead;
+    }
+>>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
 }
