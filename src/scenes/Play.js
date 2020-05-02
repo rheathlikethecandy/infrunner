@@ -92,6 +92,7 @@ class Play extends Phaser.Scene {
                 this.jumps[i].update();
                 this.buildings[i].update();
             }
+<<<<<<< HEAD
             // //check collision
             // for(var j = 0; j < 3; j++) {
             //     if(this.checkCollision(this.player, jumps[j])) {
@@ -101,6 +102,17 @@ class Play extends Phaser.Scene {
             //         this.gameOver = true;
             //     }
             // }
+=======
+            //check collision
+            for(var j = 0; j < 3; j++) {
+                if(this.checkCollision(this.player, jumps[j])) {
+                    this.gameOver = true;
+                }
+                if(this.checkCollision(this.player, pit)) {
+                    this.gameOver = true;
+                }
+            }
+>>>>>>> 226ac2e8a7561163eb6dbbdef89855b9efe10372
         }
         for(var x = 0; x < 3; x++) {
             
