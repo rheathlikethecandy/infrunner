@@ -30,8 +30,7 @@ class Testing extends Phaser.Scene {
         this.MAX_X_VEL = 500;   // pixels/second
         this.MAX_Y_VEL = 5000;
         this.JUMP_VELOCITY = -700;
-        this.physics.world.gravity.y = 2600;
-
+        
         //create a physics collider  with buildings
         this.physics.add.collider(this.player, this.buildings);
        
