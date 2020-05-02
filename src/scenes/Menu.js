@@ -1,19 +1,24 @@
 class Menu extends Phaser.Scene {
+    private startKey: Phaser.Input.Keyboard.Key;
+    private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
     constructor() {
-        super("menuScene");
+        super({key: "menuScene"});
     }
+
     preload() {
         //load audio
         this.load.audio('sfx_select', './assets/boop.wav');
         this.load.audio('sfx_land', './assets/land.wav');
         this.load.audio('sfx_jump', './assets/jump.wav');
-        this.load.audio('sfx_slide', './assets/slide.wav');
+        this.load.audio('sfx_jet', './assets/jet.wav');
         this.load.audio('sfx_siren', './assets/siren.wav');
         
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
-        
+        this.startKey = this.input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.SPACE
+        );
         
 
     }

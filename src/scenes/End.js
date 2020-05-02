@@ -8,7 +8,7 @@ class End extends Phaser.Scene {
     init(): void {
         // input tracking is handled by the Scene
         this.startKey = this.input.keyboard.addKey(
-            Phaser.Input.Keyboard.KeyCodes.SPACE;
+            Phaser.Input.Keyboard.KeyCodes.SPACE
         );
         this.startKey.isDown = false;
     }
