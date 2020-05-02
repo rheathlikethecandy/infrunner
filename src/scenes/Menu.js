@@ -13,9 +13,6 @@ class Menu extends Phaser.Scene {
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
-        
-        
-
     }
     create() {
         let centerX = game.config.width/2;
