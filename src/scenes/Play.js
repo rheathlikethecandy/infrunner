@@ -4,11 +4,20 @@ class Play extends Phaser.Scene {
     }
     preload() {
         //load images/tile sprites
-        this.load.image('backDrop', './assets/backDrop.png');
-        this.load.image('building', './assets/building.png');
-        this.load.image('jumpObs', './assets/jumpObs.png');
+        this.load.path = "assets/";
+        this.load.image('playerSprite','placeHolderSprite.png');
+        this.load.image('background','endlessrunnerbackdrop.png');
+        this.load.image('building', 'building.png');
+        this.load.image('jumpObs', 'jumpObs.png');
         // load spritesheet
-        this.load.spritesheet('dieAnim', './assets/running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        //this.load.spritesheet('dieAnim', 'running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        //load sfx
+        this.load.audio('sfx_jet','jet.wav');
+        this.load.audio('sfx_siren','siren.wav');
+        this.load.audio('sfx_slide','slide.wav');
+        this.load.audio('sfx_boop','boop.wav');
+
+
     }
     
     create() {
@@ -18,7 +27,7 @@ class Play extends Phaser.Scene {
         this.player = this.physics.add.sprite(0, 0, "player");
         this.player.setGravityY(50);
         //add death pit at bottom
-        this.pit = new Pit();
+        //this.pit = new Pit();
         // add buildings (x3)
         this.build1 = new Building(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
         this.build2 = new Building(this, 0, 0, 'building', 0, 20).setOrigin(0,0);
@@ -39,7 +48,7 @@ class Play extends Phaser.Scene {
         ]
         
         //define keys
-        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
         // animation config
@@ -83,15 +92,15 @@ class Play extends Phaser.Scene {
                 this.jumps[i].update();
                 this.buildings[i].update();
             }
-            //check collision
-            for(var j = 0; j < 3; j++) {
-                if(this.checkCollision(this.player, jumps[j])) {
-                    this.gameOver = true;
-                }
-                if(this.checkCollision(this.player, pit) {
-                    this.gameOver = true;
-                }
-            }
+            // //check collision
+            // for(var j = 0; j < 3; j++) {
+            //     if(this.checkCollision(this.player, jumps[j])) {
+            //         this.gameOver = true;
+            //     }
+            //     if(this.checkCollision(this.player, pit) {
+            //         this.gameOver = true;
+            //     }
+            // }
         }
         for(var x = 0; x < 3; x++) {
             
