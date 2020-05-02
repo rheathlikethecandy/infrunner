@@ -1,5 +1,5 @@
 //Player prefab
-class Player extends Phaser.Physics.Arcade.Sprite {
+class Player extends Phaser.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -24,7 +24,5 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.y -= 10;
             this.sfxJet.volume(0);
         }
-    
-        
     }
 }
