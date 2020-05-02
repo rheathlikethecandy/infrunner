@@ -1,15 +1,13 @@
 class Menu extends Phaser.Scene {
-    private startKey: Phaser.Input.Keyboard.Key;
-    private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
+    
     constructor() {
-        super({key: "menuScene"});
+        var startKey = Phaser.Input.Keyboard.Key;
+        super("menuScene");
     }
 
     preload() {
         //load audio
         this.load.audio('sfx_select', './assets/boop.wav');
-        this.load.audio('sfx_land', './assets/land.wav');
-        this.load.audio('sfx_jump', './assets/jump.wav');
         this.load.audio('sfx_jet', './assets/jet.wav');
         this.load.audio('sfx_siren', './assets/siren.wav');
         
@@ -19,7 +17,7 @@ class Menu extends Phaser.Scene {
         this.startKey = this.input.keyboard.addKey(
             Phaser.Input.Keyboard.KeyCodes.SPACE
         );
-        
+        this.startKey.isDown = false;
 
     }
     create() {
