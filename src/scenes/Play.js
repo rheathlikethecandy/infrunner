@@ -92,6 +92,10 @@ class Play extends Phaser.Scene {
 
          //play run animation
         this.player.play('run');   
+        text = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
+            font: "64px Arial", fill: "#ffffff", align: "center" });
+        text.anchor.setTo(0.5, 0.5);
+        game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
     }
 
 
@@ -113,15 +117,15 @@ class Play extends Phaser.Scene {
                 this.jumps[i].update();
                 this.buildings[i].update();
             }
-            //check collision
-            for(var j = 0; j < 3; j++) {
-                if(this.checkCollision(this.player, jumps[j])) {
-                    this.gameOver = true;
-                }
-                if(this.checkCollision(this.player, pit)) {
-                    this.gameOver = true;
-                }
-            }
+            // //check collision
+            // for(var j = 0; j < 3; j++) {
+            //     if(this.checkCollision(this.player, jumps[j])) {
+            //         this.gameOver = true;
+            //     }
+            //     if(this.checkCollision(this.player, pit) {
+            //         this.gameOver = true;
+            //     }
+            // }
         }
         for(var x = 0; x < 3; x++) {
             
@@ -147,5 +151,9 @@ class Play extends Phaser.Scene {
         var height = 50 + (Math.random() * 300);
         building.y = height;
         jumpObj.y = height;
+    }
+    updateScore() {
+        this.score++;
+        text.setText('Score: ' + score);
     }
 }
