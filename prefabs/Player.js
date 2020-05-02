@@ -3,6 +3,22 @@ class Player extends Phaser.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
+        this.setScale(1);
+        this.setOrigin(0, 0);
+
+        this.scene.anims.create({
+            key: 'walk',
+            frames: this.scene.anims.generateFrameNames('walkSprite',
+            {
+              prefix: 'walk_cycle',
+              start: 1,
+              end: 10,
+              zeroPad: 0
+            }),
+            frameRate: 25,
+            repeat: -1
+          });
+
         //add object to existing scene
         scene.add.existing(this);
         //action state
@@ -17,7 +33,7 @@ class Player extends Phaser.Sprite {
             this.y += 10;
             this.sfxJet.volume(1);
         }
-        else if(!keyUP.isDown && !keyW.isDown) {
+        else if(!keyUP.isDown && !keyW.isDown && ) {
             this.y -= 10;
             this.sfxJet.volume(0);
         }
