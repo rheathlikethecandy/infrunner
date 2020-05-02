@@ -5,26 +5,35 @@ class Play extends Phaser.Scene {
     preload() {
         //load images/tile sprites
         this.load.path = "assets/";
-        this.load.image('playerSprite','placeHolderSprite.png');
-        this.load.image('background','endlessrunnerbackdrop.png');
-        this.load.image('building', 'building.png');
-        this.load.image('jumpObs', 'jumpObs.png');
-        // load spritesheet
-        //this.load.spritesheet('dieAnim', 'running.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
-        //load sfx
+        tthis.load.path = "assets/";
+        this.load.image('background_Cloud','skyline-endlessrunner_cloud.png');
+        this.load.image('background_groundTile','runline-endlessrunner.png');
+        this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');
+        this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
         this.load.audio('sfx_jet','jet.wav');
         this.load.audio('sfx_siren','siren.wav');
         this.load.audio('sfx_slide','slide.wav');
         this.load.audio('sfx_boop','boop.wav');
 
-
     }
     
     create() {
-        //place tile sprite
-        this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
-        //add player
-        this.player = this.physics.add.sprite(0, 0, "player");
+         //create scrolling tile
+         this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
+         //this.backgroundCloud.depth = 4
+        
+         //creat background building tiles
+         this.backgroundBuidling  = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_buildings').setOrigin(0,0);
+         //ground tile
+         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
+ 
+         //creata player obj
+ 
+         this.player = new Player(this,game.config.width/3,game.config.height/3,'spriteSheet',0).setOrigin(0.5,0.5).setScale(0.5);
+         //this.runing = this.add.sprite(game.config.width/2,game.config.height/2,'spriteSheet',0).setOrigin(0.5,0.5).setScale(0.5);
+         
+        
+         
         this.player.setGravityY(50);
         //add death pit at bottom
         //this.pit = new Pit();
@@ -62,6 +71,15 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('dieAnim', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
+         this.anims.create(
+            {
+                key: 'run',
+                frames: this.anims.generateFrameNumbers('spriteSheet',{start: 0, end: 9, first: 0}),
+                frameRate: 10,
+                repeat: -1,
+            }
+        );
+
         //game over flag
         this.gameOver = false;
         //vector variable
@@ -72,8 +90,11 @@ class Play extends Phaser.Scene {
         //create a physics collider  with buildings
         this.physics.add.collider(this.player, this.buildings);
 
-
+         //play run animation
+        this.player.play('run');   
     }
+
+
     update() {
         //create a scrolling background
         this.backDrop.tilePositionX -=4;
@@ -92,17 +113,6 @@ class Play extends Phaser.Scene {
                 this.jumps[i].update();
                 this.buildings[i].update();
             }
-<<<<<<< HEAD
-            // //check collision
-            // for(var j = 0; j < 3; j++) {
-            //     if(this.checkCollision(this.player, jumps[j])) {
-            //         this.gameOver = true;
-            //     }
-            //     if(this.checkCollision(this.player, pit) {
-            //         this.gameOver = true;
-            //     }
-            // }
-=======
             //check collision
             for(var j = 0; j < 3; j++) {
                 if(this.checkCollision(this.player, jumps[j])) {
@@ -112,7 +122,6 @@ class Play extends Phaser.Scene {
                     this.gameOver = true;
                 }
             }
->>>>>>> 226ac2e8a7561163eb6dbbdef89855b9efe10372
         }
         for(var x = 0; x < 3; x++) {
             

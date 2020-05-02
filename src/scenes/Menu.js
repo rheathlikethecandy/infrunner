@@ -52,8 +52,8 @@ class Menu extends Phaser.Scene {
     update() {
           // start play scene when menu button is being pressed/clicked
           this.input.on('gameobjectdown', (pointer, gameObject, event) => {
-            //  this.scene.start("testingScene");
-             this.scene.start("playScene");
+             this.scene.start("testingScene");
+            // this.scene.start("playScene");
          });
     }
 }
