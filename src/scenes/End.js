@@ -1,41 +1,45 @@
 class End extends Phaser.Scene {
+    private startKey: Phaser.Input.Keyboard.Key;
+    private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
+
     constructor() {
-        super("endScene");
+        super({key: "endScene"});
+    }
+    init(): void {
+        // input tracking is handled by the Scene
+        this.startKey = this.input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.SPACE;
+        );
+        this.startKey.isDown = false;
     }
     preload() {
         //load audio
         this.load.audio('sfx_caught', './assets/endBlip.wav');
     }
     create() {
-
-             //place holder title
-        let menuConfig= {
-            frontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor:'#1F46EB',
-            colo:'#FFFFFF',
-            align:'right',
-            padding:{
-                top:5,
-                bottom:5,
-            },
-            fixedWidth:0
-        }
-
-        //creating a menu button to move to the play scene
-        this.menuButton = this.add.text(centerX,centerY,'EndScene',
-                                        menuConfig).setOrigin(0.5);
-        this.menuButton.setInteractive({
-            useHandCursor: true,
-        });
-
+        this.bitmapTexts.push(
+            this.add.bitmapText(
+                this.sys.canvas.width / 2 - 180,
+                this.sys.canvas.height / 2 - 80,
+                "pixelFont",
+                "Caught",
+                40
+            )
+        );
+        this.bitmapTexts.push(
+            this.add.bitmapText(
+                this.sys.canvas.width / 2 - 180,
+                this.sys.canvas.height / 2 - 10,
+                "pixelFont",
+                "Press SPACE to restart",
+                30
+            )
+        );
     }
 
     update() {
-           // start play scene when menu button is being pressed/clicked
-           this.input.on('gameobjectdown', (pointer, gameObject, event) => {
-            console.log('nextscene');
-             this.scene.start("menuScene");
-         });
+        if (this.startKey.isDown) {
+            this.scene.start("playScene");
+        }
     }
 }
