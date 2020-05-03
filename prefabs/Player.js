@@ -26,14 +26,17 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: -1,
             frames: this.game.anims.generateFrameNumbers('spriteSheet',
             {
-              start: 1,
-              end: 2
+              start: 0,
+              end: 1
             }),
         });
     }
     update() {
         this.processInput();
-        this.outOfBounds();
+        this.outOfBounds(); 
+        if(!this.body.touching.down) {
+            this.play('jump');
+        }
     }
 
     processInput() {
@@ -49,7 +52,6 @@ class Player extends Phaser.GameObjects.Sprite {
     jump() {
         this.jumps -= 1;
         this.body.setVelocityY(100);
-        this.play('jump');
         console.log("jump\n");
     }
     outOfBounds() {

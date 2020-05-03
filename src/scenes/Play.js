@@ -70,8 +70,8 @@ class Play extends Phaser.Scene {
             repeat: -1,
             frames: this.game.anims.generateFrameNumbers('spriteSheet',
             {
-              start: 1,
-              end: 10
+              start: 0,
+              end: 9
             }),
         });
 
