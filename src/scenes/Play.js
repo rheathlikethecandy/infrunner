@@ -90,9 +90,13 @@ class Play extends Phaser.Scene {
 
     update() {
         //create a scrolling background
-        this.backgroundCloud.tilePositionX += 1;
-        this.backgroundBuilding.tilePositionX += 3;
         this.updateScore();
+        if(!this.player.getDead()) {
+            this.backgroundCloud.tilePositionX += 1;
+            this.backgroundBuilding.tilePositionX += 3;
+            this.player.update();
+        }
+
         for(var i = 0; i < 2; i++) {
             var randY = (Math.random() * 225) + 50;
             if((this.buildings[i].x + 468) < 0) {
@@ -101,6 +105,9 @@ class Play extends Phaser.Scene {
                 this.boxes[i].setY(randY);
                 this.boxes[i].setX(900 + (Math.random() * 200));
             }
+        }
+        if(this.player.getDead()) {
+            this.scene.start("endScene");
         }
     }
     onHit() {

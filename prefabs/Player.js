@@ -40,7 +40,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     processInput() {
-        console.log(jumps);
+        console.log(this.jumps);
         if(this.body.touching.down) {
             this.jumps = 2;
         }
@@ -58,7 +58,6 @@ class Player extends Phaser.GameObjects.Sprite {
         if (this.y + this.height > this.scene.sys.canvas.height || this.y + this.height < 0) {
             this.isDead = true;
         }
-        console.log("OOB\n");
     }
     
     getDead() {
