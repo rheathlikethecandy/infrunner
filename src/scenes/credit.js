@@ -7,7 +7,7 @@ class Credit extends Phaser.Scene {
 
     preload() {
         //load audio
-        this.load.path = "assets/";
+        this.load.path = "./assets/";
         this.load.audio('sfx_select', './assets/boop.wav');
         this.load.audio('sfx_jet', './assets/jet.wav');
         this.load.audio('sfx_siren', './assets/siren.wav');
