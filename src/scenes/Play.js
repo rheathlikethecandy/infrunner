@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
     }
     preload() {
         //load images/tile sprites
-        this.load.path = "assets/";
+        this.load.path = "./assets/";
         this.load.image('background_Cloud','linedbackdrop.png');
         this.load.image('background_groundTile','runline-endlessrunner.png');
         this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');
@@ -26,9 +26,6 @@ class Play extends Phaser.Scene {
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
         this.player = new Player(this, 0, 0, 'spriteSheet');
-        //define keys
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
@@ -66,7 +63,7 @@ class Play extends Phaser.Scene {
 
         game.anims.create({
             key: 'run',
-            frameRate: 3,
+            frameRate: 10,
             repeat: -1,
             frames: this.game.anims.generateFrameNumbers('spriteSheet',
             {
@@ -74,18 +71,21 @@ class Play extends Phaser.Scene {
               end: 9
             }),
         });
+        game.anims.create({
+            key: 'jump',
+            frameRate: 10,
+            repeat: -1,
+            frames: this.game.anims.generateFrameNumbers('spriteSheet',
+            {
+              start: 0,
+              end: 1
+            }),
+        });
 
         this.player.play('run');
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
-
-        this.timer = this.time.addEvent({
-            delay: 2500,
-            callback: this.addWorld,
-            callbackScope: this,
-            loop: true
-        });
     }
 
     update() {

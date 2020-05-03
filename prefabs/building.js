@@ -12,6 +12,6 @@ class Building extends Phaser.GameObjects.Sprite {
     this.body.setImmovable();
 
     //add object to existing scene
-    scene.add.existing(this);
+    scene.physics.add.existing(this);
   }
 }

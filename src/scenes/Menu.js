@@ -15,6 +15,7 @@ class Menu extends Phaser.Scene {
         this.load.image('menuBackground','neonrunner-menu-drawn-ui.png');
         this.load.image('howButton','howtoplaybutton.png');
         this.load.image('creditButton','creditsbutton.png');
+        
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
