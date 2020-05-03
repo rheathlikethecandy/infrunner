@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite {
         );
 
         //add object to existing scene
-        scene.add.existing(this);
+        scene.physics.add.existing(this);
     }
     create() {
     }
@@ -26,6 +26,10 @@ class Player extends Phaser.GameObjects.Sprite {
         this.outOfBounds(); 
         if(!this.body.touching.down) {
             this.play('jump');
+            this.setVelocityX(0);
+        }
+        else { 
+            this.body.setVelocityX(100);
         }
     }
 

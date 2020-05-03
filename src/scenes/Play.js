@@ -89,13 +89,6 @@ class Play extends Phaser.Scene {
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
-
-        this.timer = this.time.addEvent({
-            delay: 2500,
-            callback: this.addWorld,
-            callbackScope: this,
-            loop: true
-        });
     }
 
     update() {
