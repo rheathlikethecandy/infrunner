@@ -72,7 +72,7 @@ class Menu extends Phaser.Scene {
           this.pButton.on('pointerdown', (pointer, gameObject, event) => {
              this.scene.start("playScene");
             
-            // this.scene.start("playScene");
+            //this.scene.start("endScene");
          });
          this.cButton.on('pointerdown', (pointer, gameObject, event) => {
             this.scene.start("creditScene");
