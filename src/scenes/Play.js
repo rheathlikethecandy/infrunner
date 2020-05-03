@@ -35,18 +35,18 @@ class Play extends Phaser.Scene {
         var building2 = new Building(this, 0, 0, 'building', 1);
         var building3 = new Building(this, 0, 0, 'building', 1);
         this.buildings = [
-            building1,
-            building2,
-            building3
+            this.building1,
+            this.building2,
+            this.building3
         ];
 
         this.box1 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
         this.box2 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
         this.box3 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
         this.boxes = [
-            box1,
-            box2,
-            box3
+            this.box1,
+            this.box2,
+            this.box3
         ]
 
         // variables
@@ -54,15 +54,12 @@ class Play extends Phaser.Scene {
         this.score = 0;
         this.scoreText = this.add.text(0, 0, '0', {
             fontFamily: 'Arial Black',
-            fontSize: 10,
+            fontSize: 20,
             color: '#fff',
-            stroke: '#da0050',
+            stroke: '#ff6ec7',
             strokeThickness: 4,
         });
 
-        /*for (var i = 0; i < 2; i += 1) {
-            this.buildings.add(new Building('building'));
-        }*/
         this.addWorld();
 
         //game over flag
@@ -84,18 +81,12 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
 
-        //play run animation  
-        /*this.scoreText = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
-            font: "64px Arial", fill: "#ffffff", align: "center" });
-        this.scoreText.anchor.setTo(0.5, 0.5);
-        game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);*/
-
-        /*this.timer = this.time.addEvent({
+        this.timer = this.time.addEvent({
             delay: 2500,
             callback: this.addWorld,
             callbackScope: this,
             loop: true
-        });*/
+        });
     }
 
 
@@ -103,16 +94,14 @@ class Play extends Phaser.Scene {
         //create a scrolling background
         this.backgroundCloud.tilePositionX += 1;
         this.backgroundBuilding.tilePositionX += 3;
+        this.addWorld();
+
     }
     addWorld() {
-        this.score += 1;
-        this.scoreText[0].setText("" + this.score);
-        this.scoreText[1].setText("" + this.score);
+        this.updateScore();
 
-        // randomly pick a number between 1 and 5
         let double = Math.floor(Math.random() * 5) + 1;
 
-        // add 6 obstacles with one big hole at position hole and hole + 1
         for (let i = 0; i < 10; i += 1) {
             this.addPairedObs(600, 430, 0);
         }
@@ -132,6 +121,6 @@ class Play extends Phaser.Scene {
     }
     updateScore() {
         this.score++;
-        text.setText('Score: ' + score);
+        this.scoreText.setText("Score: " + Math.floor(this.score / 200));
     }
 }
