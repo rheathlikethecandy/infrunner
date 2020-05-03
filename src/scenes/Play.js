@@ -108,6 +108,6 @@ class Play extends Phaser.Scene {
     }
     updateScore() {
         this.score++;
-        this.scoreText.setText("Score: " + Math.floor(this.score / 200));
+        this.scoreText.setText("Score: " + Math.floor(this.score / 100));
     }
 }

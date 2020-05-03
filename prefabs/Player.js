@@ -27,7 +27,8 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     processInput() {
-        if(this.body.touching.down) {
+        console.log(jumps);
+        if(this.body.blocked.down) {
             this.jumps = 2;
         }
         if(this.jumpKey.isDown && this.jumps > 0) {
@@ -36,7 +37,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
     jump() {
         this.jumps -= 1;
-        this.body.setVelocityY(-50);
+        this.body.setVelocityY(100);
         console.log(this.jumps);
     }
     outOfBounds() {
