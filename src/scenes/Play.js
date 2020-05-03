@@ -26,9 +26,6 @@ class Play extends Phaser.Scene {
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
         this.player = new Player(this, 0, 0, 'spriteSheet');
-        //define keys
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
