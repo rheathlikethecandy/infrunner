@@ -20,6 +20,16 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
     }
     create() {
+        game.anims.create({
+            key: 'jump',
+            frameRate: 3,
+            repeat: -1,
+            frames: this.game.anims.generateFrameNumbers('spriteSheet',
+            {
+              start: 1,
+              end: 2
+            }),
+        });
     }
     update() {
         this.processInput();
@@ -39,6 +49,7 @@ class Player extends Phaser.GameObjects.Sprite {
     jump() {
         this.jumps -= 1;
         this.body.setVelocityY(100);
+        this.play('jump');
         console.log("jump\n");
     }
     outOfBounds() {

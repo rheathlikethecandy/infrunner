@@ -13,6 +13,7 @@ class Play extends Phaser.Scene {
         this.load.image('building','building.png');
         this.load.image('jumpObs','neonobstacle.png');
         this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('jetSprite','jetpackspritesheet.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 1});
 
     }
     
