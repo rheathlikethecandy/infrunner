@@ -94,7 +94,7 @@ class Play extends Phaser.Scene {
         //create a scrolling background
         this.backgroundCloud.tilePositionX += 1;
         this.backgroundBuilding.tilePositionX += 3;
-        this.addWorld();
+        this.updateScore();
 
     }
     addWorld() {
@@ -107,7 +107,7 @@ class Play extends Phaser.Scene {
         }
     }
     addPairedObs() {
-
+        
     }
     onHit() {
         this.player.setDead(true);
