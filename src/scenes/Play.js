@@ -66,12 +66,22 @@ class Play extends Phaser.Scene {
 
         game.anims.create({
             key: 'run',
-            frameRate: 3,
+            frameRate: 10,
             repeat: -1,
             frames: this.game.anims.generateFrameNumbers('spriteSheet',
             {
               start: 0,
               end: 9
+            }),
+        });
+        game.anims.create({
+            key: 'jump',
+            frameRate: 10,
+            repeat: -1,
+            frames: this.game.anims.generateFrameNumbers('spriteSheet',
+            {
+              start: 0,
+              end: 1
             }),
         });
 
