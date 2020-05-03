@@ -6,7 +6,7 @@ class Player extends Phaser.GameObjects.Sprite {
         var jumpKey =  Phaser.Input.Keyboard.Key;
         var isDead = false;
         var jumps = 2;
-        this.setScale(1);
+        this.setScale(0.4);
         this.setOrigin(0, 0);
         this.scene.physics.world.enable(this);
         this.body.setGravityY(500);
