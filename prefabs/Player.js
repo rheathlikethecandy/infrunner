@@ -28,22 +28,24 @@ class Player extends Phaser.GameObjects.Sprite {
 
     processInput() {
         console.log(jumps);
-        if(this.body.blocked.down) {
+        if(this.body.touching.down) {
             this.jumps = 2;
         }
         if(this.jumpKey.isDown && this.jumps > 0) {
             this.jump();
         }
+        console.log("input\n");
     }
     jump() {
         this.jumps -= 1;
         this.body.setVelocityY(100);
-        console.log(this.jumps);
+        console.log("jump\n");
     }
     outOfBounds() {
         if (this.y + this.height > this.scene.sys.canvas.height || this.y + this.height < 0) {
             this.isDead = true;
         }
+        console.log("OOB\n");
     }
     
     getDead() {

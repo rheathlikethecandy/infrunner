@@ -87,7 +87,6 @@ class Play extends Phaser.Scene {
         });
     }
 
-
     update() {
         //create a scrolling background
         this.backgroundCloud.tilePositionX += 1;
