@@ -1,32 +1,13 @@
 //Player prefab
 class Player extends Phaser.GameObjects.Sprite {
-<<<<<<< HEAD
-    
-=======
->>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
         var jumpKey =  Phaser.Input.Keyboard.Key;
-        var isDead = boolean = false;
-        var jumps = number = 2;
-
+        var isDead = false;
+        var jumps = 2;
         this.setScale(1);
         this.setOrigin(0, 0);
-
-        this.scene.anims.create({
-            key: 'run',
-            frames: this.scene.anims.generateFrameNames('runSprite',
-            {
-              prefix: 'run_cycle',
-              start: 1,
-              end: 10,
-              zeroPad: 0
-            }),
-            frameRate: 25,
-            repeat: -1
-        });
-
         this.scene.physics.world.enable(this);
         this.body.setGravityY(500);
         this.body.setSize(this.width, this.height + 10);
@@ -38,17 +19,25 @@ class Player extends Phaser.GameObjects.Sprite {
         //add object to existing scene
         scene.add.existing(this);
     }
-    
+    create() {
+        /*this.scene.anims.create({
+            key: 'run',
+            frames: this.scene.anims.generateFrameNames('spriteSheet',
+            {
+              prefix: 'run_cycle',
+              start: 1,
+              end: 10,
+              zeroPad: 0
+            }),
+            frameRate: 25,
+            repeat: -1
+        });*/
+    }
     update() {
         this.processInput();
         this.outOfBounds();
     }
 
-<<<<<<< HEAD
-   
-
-   
-=======
     processInput() {
         if(this.body.touching.down) {
             this.jumps = 2;
@@ -75,5 +64,4 @@ class Player extends Phaser.GameObjects.Sprite {
     setDead(dead) {
         this.isDead = dead;
     }
->>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
 }

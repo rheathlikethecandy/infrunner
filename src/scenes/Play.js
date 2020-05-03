@@ -7,8 +7,7 @@ class Play extends Phaser.Scene {
     preload() {
         //load images/tile sprites
         this.load.path = "assets/";
-        tthis.load.path = "assets/";
-        this.load.image('background_Cloud','skyline-endlessrunner_cloud.png');
+        this.load.image('background_Cloud','linedbackdrop.png');
         this.load.image('background_groundTile','runline-endlessrunner.png');
         this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');
         this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
@@ -19,52 +18,17 @@ class Play extends Phaser.Scene {
     }
     
     create() {
-<<<<<<< HEAD
-         //create scrolling tile
-         this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
-         //this.backgroundCloud.depth = 4
-        
-         //creat background building tiles
-         this.backgroundBuidling  = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_buildings').setOrigin(0,0);
-         //ground tile
-         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
- 
-         //creata player obj
- 
-         this.player = new Player(this,game.config.width/3,game.config.height/3,'spriteSheet',0).setOrigin(0.5,0.5).setScale(0.5);
-         //this.runing = this.add.sprite(game.config.width/2,game.config.height/2,'spriteSheet',0).setOrigin(0.5,0.5).setScale(0.5);
-         
-        
-         
-        this.player.setGravityY(50);
-        //add death pit at bottom
-        //this.pit = new Pit();
-        // add buildings (x3)
-        this.build1 = new Building(this, 0, 0, 'building', 0, 30).setOrigin(0,0);
-        this.build2 = new Building(this, 0, 0, 'building', 0, 20).setOrigin(0,0);
-        this.build3 = new Building(this, 0, 0, 'building', 0, 10).setOrigin(0,0);
-        var buildings = [
-            this.build1,
-            this.build2,
-            this.build3
-        ]
-        // add jumps (x3)
-        this.jump1 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 30).setOrigin(0,0);
-        this.jump2 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 20).setOrigin(0,0);
-        this.jump3 = new JumpObstacle(this, 0, 0, 'jumpObs', 0, 10).setOrigin(0,0);
-        var jumps = [
-            this.jump1,
-            this.jump2,
-            this.jump3
-        ]
-        
+        //create scrolling tile
+        this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
+        //creat background building tile
+        this.backgroundBuilding  = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_buildings').setOrigin(0,0);
+        //ground tile
+        this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
+        //player
+        this.player = new Player(this, 0, 0, 'spriteSheet');
         //define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-=======
-        //place tile sprite
-        this.backDrop = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
->>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
 
         this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();
@@ -85,58 +49,45 @@ class Play extends Phaser.Scene {
         }
         this.addWorld();
 
-        this.player = new Player({
-            scene: this, 
-            x: 20, 
-            y: 275, 
-            key: "playerSprite", 
-        });
-<<<<<<< HEAD
-         this.anims.create(
-            {
-                key: 'run',
-                frames: this.anims.generateFrameNumbers('spriteSheet',{start: 0, end: 9, first: 0}),
-                frameRate: 10,
-                repeat: -1,
-            }
-        );
-
         //game over flag
         this.gameOver = false;
-        //vector variable
-        this.ACCELERATION = 1500;
-        this.MAX_Y_VEL = 5000;
-        this.JUMP_VELOCITY = -700;
-=======
->>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
+
+        game.anims.create({
+            key: 'run',
+            frameRate: 3,
+            repeat: -1,
+            frames: this.game.anims.generateFrameNumbers('spriteSheet',
+            {
+              start: 1,
+              end: 10
+            }),
+        });
 
         this.player.play('run');
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
 
-<<<<<<< HEAD
-         //play run animation
+        /*//play run animation
         this.player.play('run');   
         text = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
             font: "64px Arial", fill: "#ffffff", align: "center" });
         text.anchor.setTo(0.5, 0.5);
-        game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
-=======
+        game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);*/
+
         this.timer = this.time.addEvent({
             delay: 2500,
             callback: this.addWorld,
             callbackScope: this,
             loop: true
         });
->>>>>>> 432716a22ffb527d16941e6723dc34c9d7b23067
     }
 
 
     update() {
         //create a scrolling background
-        this.backDrop.tilePositionX -=4;
-
+        this.backgroundCloud.tilePositionX += 1;
+        this.backgroundBuilding.tilePositionX += 3;
     }
     addWorld() {
 
