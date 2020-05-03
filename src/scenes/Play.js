@@ -13,6 +13,7 @@ class Play extends Phaser.Scene {
         this.load.image('building','building.png');
         this.load.image('jumpObs','neonobstacle.png');
         this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('jetSprite','jetpackspritesheet.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 1});
 
     }
     
@@ -31,18 +32,18 @@ class Play extends Phaser.Scene {
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
-        var building1 = new Building(this, 0, 0, 'building', 1);
-        var building2 = new Building(this, 0, 0, 'building', 1);
-        var building3 = new Building(this, 0, 0, 'building', 1);
+        this.building1 = new Building(this, 0, 200, 'building', 1);
+        this.building2 = new Building(this, 500, 300, 'building', 1);
+        this.building3 = new Building(this, 1000, 100, 'building', 1);
         this.buildings = [
             this.building1,
             this.building2,
             this.building3
         ];
 
-        this.box1 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
-        this.box2 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
-        this.box3 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
+        this.box1 = new JumpObstacle(this, 100, 200, 'jumpObs', 1);
+        this.box2 = new JumpObstacle(this, 575, 300, 'jumpObs', 1);
+        this.box3 = new JumpObstacle(this, 1150, 100, 'jumpObs', 1);
         this.boxes = [
             this.box1,
             this.box2,
@@ -60,8 +61,6 @@ class Play extends Phaser.Scene {
             strokeThickness: 4,
         });
 
-        this.addWorld();
-
         //game over flag
         this.gameOver = false;
 
@@ -71,8 +70,8 @@ class Play extends Phaser.Scene {
             repeat: -1,
             frames: this.game.anims.generateFrameNumbers('spriteSheet',
             {
-              start: 1,
-              end: 10
+              start: 0,
+              end: 9
             }),
         });
 
@@ -89,38 +88,33 @@ class Play extends Phaser.Scene {
         });
     }
 
-
     update() {
         //create a scrolling background
-        this.backgroundCloud.tilePositionX += 1;
-        this.backgroundBuilding.tilePositionX += 3;
         this.updateScore();
-
-    }
-    addWorld() {
-        this.updateScore();
-
-        let double = Math.floor(Math.random() * 5) + 1;
-
-        for (let i = 0; i < 10; i += 1) {
-            this.addPairedObs(600, 430, 0);
+        if(!this.player.getDead()) {
+            this.backgroundCloud.tilePositionX += 1;
+            this.backgroundBuilding.tilePositionX += 3;
+            this.player.update();
         }
-    }
-    addPairedObs() {
-        
+
+        for(var i = 0; i < 2; i++) {
+            var randY = (Math.random() * 225) + 50;
+            if((this.buildings[i].x + 468) < 0) {
+                this.buildings[i].setX(900);
+                this.buildings[i].setY(randY);
+                this.boxes[i].setY(randY);
+                this.boxes[i].setX(900 + (Math.random() * 200));
+            }
+        }
+        if(this.player.getDead()) {
+            this.scene.start("endScene");
+        }
     }
     onHit() {
         this.player.setDead(true);
     }
-    reset(jumpObj, building) {
-        building.x = 640;
-        jumpObj.x = 640 + (Math.random() * 50);
-        var height = 50 + (Math.random() * 300);
-        building.y = height;
-        jumpObj.y = height;
-    }
     updateScore() {
         this.score++;
-        this.scoreText.setText("Score: " + Math.floor(this.score / 200));
+        this.scoreText.setText("Score: " + Math.floor(this.score / 100));
     }
 }
