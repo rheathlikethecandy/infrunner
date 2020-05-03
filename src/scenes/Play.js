@@ -31,18 +31,18 @@ class Play extends Phaser.Scene {
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
-        this.building1 = new Building(this, 900, 200, 'building', 1);
-        this.building2 = new Building(this, 1400, 300, 'building', 1);
-        this.building3 = new Building(this, 1900, 100, 'building', 1);
+        this.building1 = new Building(this, 0, 200, 'building', 1);
+        this.building2 = new Building(this, 500, 300, 'building', 1);
+        this.building3 = new Building(this, 1000, 100, 'building', 1);
         this.buildings = [
             this.building1,
             this.building2,
             this.building3
         ];
 
-        this.box1 = new JumpObstacle(this, 950, 200, 'jumpObs', 1);
-        this.box2 = new JumpObstacle(this, 1500, 300, 'jumpObs', 1);
-        this.box3 = new JumpObstacle(this, 2200, 100, 'jumpObs', 1);
+        this.box1 = new JumpObstacle(this, 100, 200, 'jumpObs', 1);
+        this.box2 = new JumpObstacle(this, 575, 300, 'jumpObs', 1);
+        this.box3 = new JumpObstacle(this, 1150, 100, 'jumpObs', 1);
         this.boxes = [
             this.box1,
             this.box2,
@@ -95,7 +95,7 @@ class Play extends Phaser.Scene {
         this.updateScore();
         for(var i = 0; i < 2; i++) {
             var randY = (Math.random() * 225) + 50;
-            if(this.buildings[i].x < 0) {
+            if((this.buildings[i].x + 468) < 0) {
                 this.buildings[i].setX(900);
                 this.buildings[i].setY(randY);
                 this.boxes[i].setY(randY);

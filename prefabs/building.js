@@ -9,6 +9,7 @@ class Building extends Phaser.GameObjects.Sprite {
     this.body.allowGravity = false;
     this.body.setVelocityX(-100);
     this.body.setSize(468, 303);
+    this.body.setImmovable();
 
     //add object to existing scene
     scene.add.existing(this);
