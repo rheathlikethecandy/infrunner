@@ -1,21 +1,16 @@
 //Spaceship prefab
 class Building extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame) {
-      super(scene, x, y, texture, frame);
+  constructor(scene, x, y, texture, frame) {
+    super(scene, x, y, texture, frame);
 
-      
-      phaserSprite.scene.physics.world.enable(this);
-      this.body.allowGravity = false;
-      this.body.setVelocityX(-50);
-      //this.body.setSize(**INSERT RES OF BUILDING PNG**);
+    this.setScale(0.5);
+    this.setOrigin(0, 0);
+    this.scene.physics.world.enable(this);
+    this.body.allowGravity = false;
+    this.body.setVelocityX(-50);
+    //this.body.setSize(**INSERT RES OF BUILDING PNG**);
 
-      //add object to existing scene
-      phaserSprite.scene.add.existing(this);
-    }
-    update(){
-
-    }
-    reset(){
-        
-    }
+    //add object to existing scene
+    scene.add.existing(this);
+  }
 }

@@ -10,10 +10,9 @@ class Play extends Phaser.Scene {
         this.load.image('background_Cloud','linedbackdrop.png');
         this.load.image('background_groundTile','runline-endlessrunner.png');
         this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');
+        this.load.image('building','building.png');
+        this.load.image('jumpObs','neonobstacle.png');
         this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
-        this.load.audio('sfx_jet','jet.wav');
-        this.load.audio('sfx_siren','siren.wav');
-        this.load.audio('sfx_boop','boop.wav');
 
     }
     
@@ -30,9 +29,26 @@ class Play extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
-        this.obstacles = this.physics.add.group();
-        this.buildings = this.physics.add.staticGroup();
-        
+        /*this.obstacles = this.physics.add.group();
+        this.buildings = this.physics.add.staticGroup();*/
+        var building1 = new Building(this, 0, 0, 'building', 1);
+        var building2 = new Building(this, 0, 0, 'building', 1);
+        var building3 = new Building(this, 0, 0, 'building', 1);
+        this.buildings = [
+            building1,
+            building2,
+            building3
+        ];
+
+        this.box1 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
+        this.box2 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
+        this.box3 = new JumpObstacle(this, 0, 0, 'jumpObs', 1);
+        this.boxes = [
+            box1,
+            box2,
+            box3
+        ]
+
         // variables
         this.timer = Phaser.Time.TimerEvent;
         this.score = 0;
@@ -44,9 +60,9 @@ class Play extends Phaser.Scene {
             strokeThickness: 4,
         });
 
-        for (var i = 0; i < 2; i += 1) {
-            this.buildings.create(i * 380, 590, 'building');
-        }
+        /*for (var i = 0; i < 2; i += 1) {
+            this.buildings.add(new Building('building'));
+        }*/
         this.addWorld();
 
         //game over flag
@@ -68,19 +84,18 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
 
-        /*//play run animation
-        this.player.play('run');   
-        text = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
+        //play run animation  
+        /*this.scoreText = game.add.text(game.world.centerX, game.world.centerY, 'Score: 0', {
             font: "64px Arial", fill: "#ffffff", align: "center" });
-        text.anchor.setTo(0.5, 0.5);
+        this.scoreText.anchor.setTo(0.5, 0.5);
         game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);*/
 
-        this.timer = this.time.addEvent({
+        /*this.timer = this.time.addEvent({
             delay: 2500,
             callback: this.addWorld,
             callbackScope: this,
             loop: true
-        });
+        });*/
     }
 
 
@@ -90,6 +105,19 @@ class Play extends Phaser.Scene {
         this.backgroundBuilding.tilePositionX += 3;
     }
     addWorld() {
+        this.score += 1;
+        this.scoreText[0].setText("" + this.score);
+        this.scoreText[1].setText("" + this.score);
+
+        // randomly pick a number between 1 and 5
+        let double = Math.floor(Math.random() * 5) + 1;
+
+        // add 6 obstacles with one big hole at position hole and hole + 1
+        for (let i = 0; i < 10; i += 1) {
+            this.addPairedObs(600, 430, 0);
+        }
+    }
+    addPairedObs() {
 
     }
     onHit() {
