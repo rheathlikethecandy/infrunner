@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
     }
     preload() {
         //load images/tile sprites
-        this.load.path = "assets/";
+        this.load.path = "./assets/";
         this.load.image('background_Cloud','linedbackdrop.png');
         this.load.image('background_groundTile','runline-endlessrunner.png');
         this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');

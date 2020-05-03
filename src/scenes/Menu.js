@@ -7,10 +7,10 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load audio
-        this.load.path = "assets/";
-        this.load.audio('sfx_select', './assets/boop.wav');
-        this.load.audio('sfx_jet', './assets/jet.wav');
-        this.load.audio('sfx_siren', './assets/siren.wav');
+        this.load.path = "./assets/";
+        this.load.audio('sfx_select', 'boop.wav');
+        this.load.audio('sfx_jet', 'jet.wav');
+        this.load.audio('sfx_siren', 'siren.wav');
         
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
