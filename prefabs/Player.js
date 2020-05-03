@@ -20,18 +20,6 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
     }
     create() {
-        /*this.scene.anims.create({
-            key: 'run',
-            frames: this.scene.anims.generateFrameNames('spriteSheet',
-            {
-              prefix: 'run_cycle',
-              start: 1,
-              end: 10,
-              zeroPad: 0
-            }),
-            frameRate: 25,
-            repeat: -1
-        });*/
     }
     update() {
         this.processInput();
