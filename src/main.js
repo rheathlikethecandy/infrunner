@@ -1,4 +1,8 @@
-/* Creative tilt: All sound and art are handmade and high quality, save for all the background music 
+/* 
+Group members: Emily Ye, Ryan Heath, John Chun Yin Tsoi
+Game title: Neon runner
+Date completed: 5/3/2020
+Creative tilt: Unique visual style, neo-seoul esque runner. All sound is made by us, save for all the background music
 */
 let config = {
     type: Phaser.CANVAS,
