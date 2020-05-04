@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
 
     }
     create() {
-        console.log("CREATE");
+        
         this.playM = this.sound.add('bgm_2', {volume: 0.1});
         this.playM.play();
         //create scrolling tile
@@ -29,11 +29,14 @@ class Play extends Phaser.Scene {
         //ground tile
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
-        this.player = new Player(this, 0, 0, 'spriteSheet');
+        this.player = new Player(this, 0, 0, 'spriteSheet',0).setOrigin(0.5,0.5);
 
-        this.building1 = new Building(this, 0, 300, 'building');
-        this.building2 = new Building(this, 500, 400, 'building');
-        this.building3 = new Building(this, 1000, 350, 'building');
+        /*this.obstacles = this.physics.add.group();
+        this.buildings = this.physics.add.staticGroup();*/
+
+        this.building1 = new Building(this, 0, 200, 'building',0);
+        this.building2 = new Building(this, 500, 300, 'building',0);
+        this.building3 = new Building(this, 1000, 100, 'building',0);
         this.buildings = [
             this.building1,
             this.building2,
@@ -96,7 +99,7 @@ class Play extends Phaser.Scene {
             key: 'jump',
             frameRate: 10,
             repeat: 1,
-            frames: this.game.anims.generateFrameNumbers('spriteSheet',
+            frames: this.game.anims.generateFrameNumbers('jetSprite',
             {
               start: 0,
               end: 1
