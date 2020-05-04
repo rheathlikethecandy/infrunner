@@ -25,8 +25,8 @@ class Credit extends Phaser.Scene {
         this.mButton.setInteractive({
             useHandCursor: true,
         });
-          // start play scene when menu button is being pressed/clicked
-          this.mButton.on('pointerdown', (pointer, gameObject, event) => {
+        // start play scene when menu button is being pressed/clicked
+        this.mButton.on('pointerdown', (pointer, gameObject, event) => {
             this.scene.start("menuScene");
            // this.scene.start("playScene");
         });
@@ -34,15 +34,6 @@ class Credit extends Phaser.Scene {
     }
       
     update() {
-      
-        //  this.pButton.on('gameobjectdown', (pointer, gameObject, event) => {
-        //     this.scene.start("testingScene");
-        //    // this.scene.start("playScene");
-        // });
-        // this.pButton.on('gameobjectdown', (pointer, gameObject, event) => {
-        //     this.scene.start("testingScene");
-        //    // this.scene.start("playScene");
-        // });
         
     }
 }

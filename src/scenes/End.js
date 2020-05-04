@@ -25,19 +25,19 @@ class End extends Phaser.Scene {
         this.mButton.setInteractive({
             useHandCursor: true,
         });
-       
+        // start play scene when restart button is being pressed/clicked
+        this.eButton.on('pointerdown', (pointer, gameObject, event) => {
+            this.endM.volume = 0;
+            this.scene.start("playScene");
+        });
+          // start menu scene when menu button is being pressed/clicked
+        this.mButton.on('pointerdown', (pointer, gameObject, event) => {
+            this.endM.volume = 0;
+            this.scene.start("menuScene");
+        });
     }
       
     update() {
-          // start play scene when restart button is being pressed/clicked
-          this.eButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.endM.volume = 0;
-            this.scene.start("playScene");
-         });
-          // start menu scene when menu button is being pressed/clicked
-          this.mButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.endM.volume = 0;
-            this.scene.start("menuScene");
-         });
+          
     }
 }

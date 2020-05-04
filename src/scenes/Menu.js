@@ -21,7 +21,6 @@ class Menu extends Phaser.Scene {
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
-   
     }
     create() {
         let centerX = game.config.width/2;
@@ -87,19 +86,16 @@ class Menu extends Phaser.Scene {
         });
         this.cButton.on('pointerdown', (pointer, gameObject, event) => {
            this.scene.start("creditScene");
-           this.menuM.volume = 0;
           // this.scene.start("playScene");
-       });
-       this.htpButton.on('pointerdown', (pointer, gameObject, event) => {
+        });
+        this.htpButton.on('pointerdown', (pointer, gameObject, event) => {
            this.scene.start("howScene");
-           this.menuM.volume = 0;
           // this.scene.start("playScene");
-       });
-
+        });
        
     }
-      
     update() {
-       
+          
+
     }
 }
