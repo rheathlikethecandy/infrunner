@@ -6,14 +6,13 @@ class Play extends Phaser.Scene {
     }
     preload() {
         //load images/tile sprites
-        this.load.path = "./assets/";
-        this.load.image('background_Cloud','linedbackdrop.png');
-        this.load.image('background_groundTile','runline-endlessrunner.png');
-        this.load.image('background_buildings','cityline-endlessrunner_backgroundBuildings.png');
-        this.load.image('building','building.png');
-        this.load.image('jumpObs','neonobstacle.png');
-        this.load.spritesheet('spriteSheet','runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
-        this.load.spritesheet('jetSprite','jetpackspritesheet.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 1});
+        this.load.image('background_Cloud','./assets/linedbackdrop.png');
+        this.load.image('background_groundTile','./assets/runline-endlessrunner.png');
+        this.load.image('background_buildings','./assets/cityline-endlessrunner_backgroundBuildings.png');
+        this.load.image('building','./assets/building.png');
+        this.load.image('jumpObs','./assets/neonobstacle.png');
+        this.load.spritesheet('spriteSheet','./assets/runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('jetSprite','./assets/jetpackspritesheet.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 1});
 
     }
     

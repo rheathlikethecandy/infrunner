@@ -7,17 +7,16 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load audio
-        this.load.path = "./assets/";
-        this.load.audio('sfx_select', 'boop.wav');
-        this.load.audio('sfx_jet', 'jet.wav');
-        this.load.audio('sfx_siren', 'siren.wav');
-        this.load.audio('bgm_1','bgm_1.wav');
-        this.load.audio('bgm_2','bgm_2.wav');
-        this.load.audio('bgm_3','bgm_3.wav');
-        this.load.image('playButton','playbutton.png');
-        this.load.image('menuBackground','neonrunner-menu-drawn-ui.png');
-        this.load.image('howButton','howtoplaybutton.png');
-        this.load.image('creditButton','creditsbutton.png');
+        this.load.audio('sfx_select', './assets/boop.wav');
+        this.load.audio('sfx_jet', './assets/jet.wav');
+        this.load.audio('sfx_siren', './assets/siren.wav');
+        this.load.audio('bgm_1','./assets/bgm_1.wav');
+        this.load.audio('bgm_2','./assets/bgm_2.wav');
+        this.load.audio('bgm_3','./assets/bgm_3.wav');
+        this.load.image('playButton','./assets/playbutton.png');
+        this.load.image('menuBackground','./assets/neonrunner-menu-drawn-ui.png');
+        this.load.image('howButton','./assets/howtoplaybutton.png');
+        this.load.image('creditButton','./assets/creditsbutton.png');
         
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
@@ -32,9 +31,9 @@ class Menu extends Phaser.Scene {
         //background
         this.menuBack = this.add.tileSprite(0,0,900,600,'menuBackground').setOrigin(0,0);
         //play bgm
-        var bgmNum = Math.floor(Math.random() * Math.floor(3));
+        /*var bgmNum = Math.floor(Math.random() * Math.floor(3));
 
-       if(bgmNum == 0){
+        if(bgmNum == 0){
         this.bgm = game.sound.add('bgm_1');
         this.bgm.setLoop(loop);
         this.bgm.play();
@@ -47,7 +46,7 @@ class Menu extends Phaser.Scene {
         this.bgm = game.sound.add('bgm_3');
         this.bgm.setLoop(loop);
         this.bgm.play();
-       }
+       }*/
        
 
         //define keys
