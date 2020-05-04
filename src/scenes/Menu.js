@@ -79,25 +79,27 @@ class Menu extends Phaser.Scene {
         this.cButton.setInteractive({
             useHandCursor: true,
         });
-      
+         // start play scene when menu button is being pressed/clicked
+         this.pButton.on('pointerdown', (pointer, gameObject, event) => {
+            this.menuM.volume = 0;
+           this.scene.start("playScene");
+           //this.scene.start("endScene");
+        });
+        this.cButton.on('pointerdown', (pointer, gameObject, event) => {
+           this.scene.start("creditScene");
+           this.menuM.volume = 0;
+          // this.scene.start("playScene");
+       });
+       this.htpButton.on('pointerdown', (pointer, gameObject, event) => {
+           this.scene.start("howScene");
+           this.menuM.volume = 0;
+          // this.scene.start("playScene");
+       });
+
        
     }
       
     update() {
-          // start play scene when menu button is being pressed/clicked
-          this.pButton.on('pointerdown', (pointer, gameObject, event) => {
-             this.menuM.volume = 0;
-            this.scene.start("playScene");
-            //this.scene.start("endScene");
-         });
-         this.cButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.scene.start("creditScene");
-           // this.scene.start("playScene");
-        });
-        this.htpButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.scene.start("howScene");
-           // this.scene.start("playScene");
-        });
-
+       
     }
 }
