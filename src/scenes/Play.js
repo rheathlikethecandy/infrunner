@@ -29,7 +29,7 @@ class Play extends Phaser.Scene {
         //ground tile
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
-        this.player = new Player(this, 0, 0, 'spriteSheet',0).setOrigin(0.5,0.5);
+        this.player = new Player(this, 50, 300, 'spriteSheet',0).setOrigin(0.5,0.5);
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
@@ -43,7 +43,7 @@ class Play extends Phaser.Scene {
             this.building3
         ];
 
-        this.box1 = new JumpObstacle(this, 200, 309, 'jumpObs');
+        this.box1 = new JumpObstacle(this, 300, 309, 'jumpObs');
         this.box2 = new JumpObstacle(this, 750, 209, 'jumpObs');
         this.box3 = new JumpObstacle(this, 1300, 409, 'jumpObs');
         this.boxes = [
