@@ -11,6 +11,9 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_select', 'boop.wav');
         this.load.audio('sfx_jet', 'jet.wav');
         this.load.audio('sfx_siren', 'siren.wav');
+        this.load.audio('bgm_1','bgm_1.wav');
+        this.load.audio('bgm_2','bgm_2.wav');
+        this.load.audio('bgm_3','bgm_3.wav');
         this.load.image('playButton','playbutton.png');
         this.load.image('menuBackground','neonrunner-menu-drawn-ui.png');
         this.load.image('howButton','howtoplaybutton.png');
@@ -19,18 +22,33 @@ class Menu extends Phaser.Scene {
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
-        this.startKey = this.input.keyboard.addKey(
-            Phaser.Input.Keyboard.KeyCodes.SPACE
-        );
-        this.startKey.isDown = false;
-        
+   
     }
     create() {
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
+        let loop = true;
 
         //background
         this.menuBack = this.add.tileSprite(0,0,900,600,'menuBackground').setOrigin(0,0);
+        //play bgm
+        var bgmNum = Math.floor(Math.random() * Math.floor(3));
+
+       if(bgmNum == 0){
+        this.bgm = game.sound.add('bgm_1');
+        this.bgm.setLoop(loop);
+        this.bgm.play();
+       }else if(bgmNum == 1){
+        this.bgm = game.sound.add('bgm_2');
+        this.bgm.setLoop(loop);
+        this.bgm.play();
+       }
+       else if(bgmNum == 2){
+        this.bgm = game.sound.add('bgm_3');
+        this.bgm.setLoop(loop);
+        this.bgm.play();
+       }
+       
 
         //define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
