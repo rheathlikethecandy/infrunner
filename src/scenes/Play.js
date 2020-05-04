@@ -22,6 +22,9 @@ class Play extends Phaser.Scene {
         
         this.playM = this.sound.add('bgm_2', {volume: 0.1});
         this.playM.play();
+        let loop = true;
+        
+
         //create scrolling tile
         this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
         //creat background building tile
@@ -29,14 +32,14 @@ class Play extends Phaser.Scene {
         //ground tile
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
-        this.player = new Player(this, 0, 0, 'spriteSheet',0).setOrigin(0.5,0.5);
+        this.player = new Player(this, 20, 0, 'spriteSheet',0).setOrigin(0.5,0.5);
 
         /*this.obstacles = this.physics.add.group();
         this.buildings = this.physics.add.staticGroup();*/
 
-        this.building1 = new Building(this, 0, 200, 'building',0);
-        this.building2 = new Building(this, 500, 300, 'building',0);
-        this.building3 = new Building(this, 1000, 100, 'building',0);
+        this.building1 = new Building(this, 0, 200, 'building',0).setOrigin(0,0);
+        this.building2 = new Building(this, 500, 300, 'building',0).setOrigin(0,0);
+        this.building3 = new Building(this, 1000, 100, 'building',0).setOrigin(0,0);
         this.buildings = [
             this.building1,
             this.building2,
@@ -85,7 +88,7 @@ class Play extends Phaser.Scene {
         //game over flag
         this.gameOver = false;
 
-        this.anims.create({
+        game.anims.create({
             key: 'run',
             frameRate: 10,
             repeat: -1,
@@ -105,8 +108,9 @@ class Play extends Phaser.Scene {
               end: 1
             }),
         });
-
-        this.player.play('run');
+    
+        
+        this.player.anims.play('run');
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.collider(this.player, this.boxes);
@@ -115,6 +119,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+ 
         //create a scrolling background
         this.updateScore();
         if(!this.player.getDead()) {
