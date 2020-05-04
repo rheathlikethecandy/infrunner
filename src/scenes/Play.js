@@ -22,8 +22,8 @@ class Play extends Phaser.Scene {
         
         this.playM = this.sound.add('bgm_2', {volume: 0.1});
         this.playM.play();
-        let loop = true;
-        
+      
+        this.playM.loop = true;
 
         //create scrolling tile
         this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
@@ -33,6 +33,8 @@ class Play extends Phaser.Scene {
         this.backgroundGround = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_groundTile').setOrigin(0,0);
         //player
         this.player = new Player(this, 50, 300, 'spriteSheet',0).setOrigin(0.5,0.5);
+
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.building1 = new Building(this, 0, 400, 'building',0);
         this.building2 = new Building(this, 600, 300, 'building',0);
@@ -97,8 +99,8 @@ class Play extends Phaser.Scene {
         });
         game.anims.create({
             key: 'jump',
-            frameRate: 10,
-            repeat: 1,
+            frameRate: 1,
+            repeat: -1,
             frames: this.game.anims.generateFrameNumbers('jetSprite',
             {
               start: 0,
@@ -107,7 +109,7 @@ class Play extends Phaser.Scene {
         });
     
         
-        this.player.anims.play('run',true);
+        
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.collider(this.player, this.boxes);
@@ -123,7 +125,9 @@ class Play extends Phaser.Scene {
     }
 
     update() {
- 
+      
+        this.player.anims.play('run',true);
+        
         //create a scrolling background
         this.updateScore();
         if(!this.player.getDead()) {
