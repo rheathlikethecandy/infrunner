@@ -1,34 +1,16 @@
-//Spaceship prefab
+//cop prefab
 class Cop extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);
       //add object to existing scene
-      scene.add.existing(this);
-      this.up = false;
-      this.out = false;
+      this.setScale(0.5);
+      this.setOrigin(0,0);
+  
+      this.scene.physics.world.enable(this);
+      this.body.allowGravity = false;
+      this.body.setVelocityX(-100);
+      this.body.setSize(this.width, this.height);
+  
+      scene.physics.add.existing(this);
     }
-    update() {
-        if(this.out == true && this.x < 50) {
-            this.x++;
-        }
-        else if(this.out == false && this.x > 0) {
-            this.x--;
-        }
-        //cop car bob
-        if(this.up == false) {
-            this.y--;
-        }
-        if(this.up == true) {
-            this.y++;
-        }
-        if(this.y > 210) {
-            this.up = true;
-        }
-        if(this.y < 190) {
-            this.up = false;
-        }
-    }
-    reset() {
-        this.x = game.config.width;
-    }
-}
+  }
