@@ -1,7 +1,10 @@
 class End extends Phaser.Scene {
-    constructor() {
+    constructor(scoreVar) {
         var restartKey = Phaser.Input.Keyboard.Key;
         super("endScene");
+    }
+    init(data){
+        this.score = data;
     }
     preload() {
         this.load.path = "./assets/";
@@ -35,6 +38,7 @@ class End extends Phaser.Scene {
             this.endM.volume = 0;
             this.scene.start("menuScene");
         });
+        console.log(this.score);
     }
       
     update() {

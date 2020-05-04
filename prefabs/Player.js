@@ -28,10 +28,13 @@ class Player extends Phaser.GameObjects.Sprite {
         this.processInput();
         this.outOfBounds(); 
         if(!this.body.touching.down) {
-            this.play('jump');
+            this.anims.play('walk', false);
+            this.anims.play('jump', true);
             this.body.setVelocityX(0);
         }
         else { 
+            this.anims.play('jump', false);
+            this.anims.play('walk', true);
             this.body.setVelocityX(250);
         }
     }
@@ -51,7 +54,7 @@ class Player extends Phaser.GameObjects.Sprite {
         console.log("jump\n");
     }
     outOfBounds() {
-        if (this.y + this.height > this.scene.sys.canvas.height || this.x + this.width < 0) {
+        if (this.y > 600 || this.x + this.width < 0) {
             this.isDead = true;
         }
     }

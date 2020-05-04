@@ -35,17 +35,17 @@ class Play extends Phaser.Scene {
         this.buildings = this.physics.add.staticGroup();*/
 
         this.building1 = new Building(this, 0, 400, 'building',0);
-        this.building2 = new Building(this, 600, 300, 'building',0);
-        this.building3 = new Building(this, 1200, 500, 'building',0);
+        this.building2 = new Building(this, 800, 300, 'building',0);
+        this.building3 = new Building(this, 1600, 500, 'building',0);
         this.buildings = [
             this.building1,
             this.building2,
             this.building3
         ];
 
-        this.box1 = new JumpObstacle(this, 300, 309, 'jumpObs');
-        this.box2 = new JumpObstacle(this, 750, 209, 'jumpObs');
-        this.box3 = new JumpObstacle(this, 1300, 409, 'jumpObs');
+        this.box1 = new JumpObstacle(this, 300, 345, 'jumpObs');
+        this.box2 = new JumpObstacle(this, 950, 245, 'jumpObs');
+        this.box3 = new JumpObstacle(this, 1700, 445, 'jumpObs');
         this.boxes = [
             this.box1,
             this.box2,
@@ -85,7 +85,7 @@ class Play extends Phaser.Scene {
         //game over flag
         this.gameOver = false;
 
-        this.anims.create({
+        game.anims.create({
             key: 'run',
             frameRate: 10,
             repeat: -1,
@@ -138,7 +138,8 @@ class Play extends Phaser.Scene {
         }
         if(this.player.getDead()) {
             this.playM.volume = 0;
-            this.scene.start("endScene");
+            this.score = Math.floor(this.score / 100);
+            this.scene.start("endScene", this.score);
         }
     }
     updateScore() {
