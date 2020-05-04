@@ -29,7 +29,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
         }
         else { 
-            this.body.setVelocityX(100);
+            this.body.setVelocityX(105);
         }
     }
 
@@ -44,7 +44,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
     jump() {
         this.jumps -= 1;
-        this.body.setVelocityY(-200);
+        this.body.setVelocityY(-300);
         console.log("jump\n");
     }
     outOfBounds() {
