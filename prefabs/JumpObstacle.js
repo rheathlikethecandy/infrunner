@@ -11,7 +11,8 @@ class JumpObstacle extends Phaser.GameObjects.Sprite {
     this.body.setVelocityX(-100);
     this.body.setSize(this.width, this.height);
     this.body.setImmovable();
-
+    //add object 
+    scene.add.existing(this);
     scene.physics.add.existing(this);
   }
 }
