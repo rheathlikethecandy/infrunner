@@ -15,7 +15,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpKey = this.scene.input.keyboard.addKey(
             Phaser.Input.Keyboard.KeyCodes.SPACE
         );
-
+        //add object 
+        scene.add.existing(this);
         //add object to existing scene
         scene.add.existing(this);
         scene.physics.add.existing(this);

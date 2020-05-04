@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
         this.load.image('background_buildings','./assets/cityline-endlessrunner_backgroundBuildings.png');
         this.load.image('building','./assets/building.png');
         this.load.image('jumpObs','./assets/neonobstacle.png');
-        this.load.spritesheet('copSprite','./assets/copsprite.png',{frameWidth: 170, frameHeight: 166, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('copSprite','./assets/copsprite.png',{frameWidth: 170, frameHeight: 166, startFrame: 0, endFrame: 1});
         this.load.spritesheet('spriteSheet','./assets/runnerspritesheetfitted.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 9});
         this.load.spritesheet('jetSprite','./assets/jetpackspritesheet.png',{frameWidth: 148.1, frameHeight: 200, startFrame: 0, endFrame: 1});
 
@@ -85,7 +85,7 @@ class Play extends Phaser.Scene {
         //game over flag
         this.gameOver = false;
 
-        game.anims.create({
+        this.anims.create({
             key: 'run',
             frameRate: 10,
             repeat: -1,
