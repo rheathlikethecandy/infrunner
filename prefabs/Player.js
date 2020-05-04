@@ -34,14 +34,14 @@ class Player extends Phaser.GameObjects.Sprite {
         this.processInput();
         this.outOfBounds(); 
         if(!this.body.touching.down) {
-            this.anims.play('walk', false);
+            this.anims.play('run', false);
             this.anims.play('jump', true);
             this.body.setVelocityX(0);
             
         }
         else { 
             this.anims.play('jump', false);
-            this.anims.play('walk', true);
+            this.anims.play('run', true);
             this.body.setVelocityX(250);
         }
     }
