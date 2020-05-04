@@ -10,6 +10,8 @@ class End extends Phaser.Scene {
         this.load.image('restartButton','restartbutton.png');
     }
     create() {
+        this.endM = this.sound.add('bgm_3', {volume: 0.1});
+        this.endM.play();
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
 
@@ -29,12 +31,12 @@ class End extends Phaser.Scene {
     update() {
           // start play scene when restart button is being pressed/clicked
           this.eButton.on('pointerdown', (pointer, gameObject, event) => {
-    
+            this.endM.volume = 0;
             this.scene.start("playScene");
          });
           // start menu scene when menu button is being pressed/clicked
           this.mButton.on('pointerdown', (pointer, gameObject, event) => {
-            
+            this.endM.volume = 0;
             this.scene.start("menuScene");
          });
     }

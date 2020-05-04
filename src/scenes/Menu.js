@@ -27,7 +27,8 @@ class Menu extends Phaser.Scene {
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
         let loop = true;
-
+        this.menuM = this.sound.add('bgm_1', {volume: 0.1});
+        this.menuM.play();
         //background
         this.menuBack = this.add.tileSprite(0,0,900,600,'menuBackground').setOrigin(0,0);
         //play bgm
@@ -47,8 +48,6 @@ class Menu extends Phaser.Scene {
         this.bgm.setLoop(loop);
         this.bgm.play();
        }*/
-       
-
         //define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -87,8 +86,8 @@ class Menu extends Phaser.Scene {
     update() {
           // start play scene when menu button is being pressed/clicked
           this.pButton.on('pointerdown', (pointer, gameObject, event) => {
-             this.scene.start("playScene");
-            
+             this.menuM.volume = 0;
+            this.scene.start("playScene");
             //this.scene.start("endScene");
          });
          this.cButton.on('pointerdown', (pointer, gameObject, event) => {

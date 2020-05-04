@@ -17,6 +17,8 @@ class Play extends Phaser.Scene {
     }
     
     create() {
+        this.playM = this.sound.add('bgm_2', {volume: 0.1});
+        this.playM.play();
         //create scrolling tile
         this.backgroundCloud = this.add.tileSprite(0,0,game.config.width,game.config.height,'background_Cloud').setOrigin(0,0);
         //creat background building tile
@@ -106,6 +108,7 @@ class Play extends Phaser.Scene {
             }
         }
         if(this.player.getDead()) {
+            this.playM.volume = 0;
             this.scene.start("endScene");
         }
     }
