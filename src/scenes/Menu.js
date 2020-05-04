@@ -78,8 +78,8 @@ class Menu extends Phaser.Scene {
         this.cButton.setInteractive({
             useHandCursor: true,
         });
-        // start play scene when menu button is being pressed/clicked
-        this.pButton.on('pointerdown', (pointer, gameObject, event) => {
+         // start play scene when menu button is being pressed/clicked
+         this.pButton.on('pointerdown', (pointer, gameObject, event) => {
             this.menuM.volume = 0;
            this.scene.start("playScene");
            //this.scene.start("endScene");
