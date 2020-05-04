@@ -4,7 +4,7 @@ class Cop extends Phaser.GameObjects.Sprite {
       super(scene, x, y, texture, frame);
       this.play('copjet');
       //add object to existing scene
-      this.setScale(0.1);
+      this.setScale(0.2);
       this.setOrigin(0,0);
   
       this.scene.physics.world.enable(this);
@@ -12,11 +12,7 @@ class Cop extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(-200);
       this.body.setSize(this.width, this.height);
       this.body.setImmovable();
-
-      if(this.body.touching.left) {
-          this.x = 900;
-      }
-  
+      scene.add.existing(this);
       scene.physics.add.existing(this);
     }
 }

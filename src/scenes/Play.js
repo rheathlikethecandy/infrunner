@@ -131,7 +131,7 @@ class Play extends Phaser.Scene {
                 this.boxes[i].setY(randY - 91);
                 this.boxes[i].setX(900 + (Math.random() * 200));
             }
-            if(this.cops[i].x + 10 < 0) {
+            if(this.cops[i].x + 34 < 0) {
                 this.cops[i].x = 900 + (Math.random() * 70);
                 this.cops[i].y = (Math.random() * 300);
             }
@@ -140,9 +140,6 @@ class Play extends Phaser.Scene {
             this.playM.volume = 0;
             this.scene.start("endScene");
         }
-    }
-    onHit() {
-        this.player.setDead(true);
     }
     updateScore() {
         this.score++;
