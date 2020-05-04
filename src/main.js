@@ -1,3 +1,5 @@
+/* Creative tilt: All sound and art are handmade and high quality, save for all the background music 
+*/
 let config = {
     type: Phaser.CANVAS,
     width: 900,
