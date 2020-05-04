@@ -15,6 +15,7 @@ class End extends Phaser.Scene {
     create() {
         this.endM = this.sound.add('bgm_3', {volume: 0.1});
         this.endM.play();
+        this.endM.loop = true;
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
         //creating a menu button to move to the play scene

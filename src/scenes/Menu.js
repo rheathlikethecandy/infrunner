@@ -25,9 +25,11 @@ class Menu extends Phaser.Scene {
     create() {
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
-        let loop = true;
+        
         this.menuM = this.sound.add('bgm_1', {volume: 0.1});
+       
         this.menuM.play();
+      
         //background
         this.menuBack = this.add.tileSprite(0,0,900,600,'menuBackground').setOrigin(0,0);
       
