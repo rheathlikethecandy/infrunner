@@ -9,7 +9,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.setScale(0.4);
         this.setOrigin(0, 0);
         this.scene.physics.world.enable(this);
-        this.body.setGravityY(250);
+        this.body.setGravityY(300);
         this.body.setSize(this.width, this.height + 10);
 
         this.jumpKey = this.scene.input.keyboard.addKey(
@@ -29,7 +29,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
         }
         else { 
-            this.body.setVelocityX(105);
+            this.body.setVelocityX(220);
         }
     }
 
@@ -44,11 +44,11 @@ class Player extends Phaser.GameObjects.Sprite {
     }
     jump() {
         this.jumps -= 1;
-        this.body.setVelocityY(-300);
+        this.body.setVelocityY(-400);
         console.log("jump\n");
     }
     outOfBounds() {
-        if (this.y + this.height > this.scene.sys.canvas.height || this.y + this.height < 0) {
+        if (this.y + this.height > this.scene.sys.canvas.height || this.x + this.width < 0) {
             this.isDead = true;
         }
     }
