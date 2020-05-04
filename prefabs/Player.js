@@ -6,6 +6,7 @@ class Player extends Phaser.GameObjects.Sprite {
         var jumpKey =  Phaser.Input.Keyboard.Key;
         var isDead = false;
         var jumps = 2;
+        
         this.setScale(0.4);
         this.setOrigin(0, 0);
         this.scene.physics.world.enable(this);
@@ -21,16 +22,19 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this);
     }
     create() {
+      
     }
     update() {
         this.processInput();
         this.outOfBounds(); 
         if(!this.body.touching.down) {
-            this.play('jump');
+            
             this.body.setVelocityX(0);
+            
         }
         else { 
             this.body.setVelocityX(220);
+           
         }
     }
 
@@ -38,16 +42,22 @@ class Player extends Phaser.GameObjects.Sprite {
         console.log(this.jumps);
         if(this.body.touching.down) {
             this.jumps = 2;
+            this.anims.play('run',true);
+            
         }
         if(this.jumpKey.isDown && this.jumps > 0) {
             this.jump();
         }
     }
     jump() {
+        // this.play('jump')
         this.jumps -= 1;
+        this.anims.play('jump',true);
         this.body.setVelocityY(-400);
+        
         console.log("jump\n");
     }
+    
     outOfBounds() {
         if (this.y + this.height > this.scene.sys.canvas.height || this.x + this.width < 0) {
             this.isDead = true;
@@ -61,4 +71,5 @@ class Player extends Phaser.GameObjects.Sprite {
     setDead(dead) {
         this.isDead = dead;
     }
+    
 }

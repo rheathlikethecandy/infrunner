@@ -110,7 +110,7 @@ class Play extends Phaser.Scene {
         });
     
         
-        this.player.anims.play('run');
+        this.player.anims.play('run',true);
         
         this.physics.add.collider(this.player, this.buildings);
         this.physics.add.collider(this.player, this.boxes);
