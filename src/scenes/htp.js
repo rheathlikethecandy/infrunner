@@ -25,16 +25,16 @@ class HTP extends Phaser.Scene {
         this.mButton.setInteractive({
             useHandCursor: true,
         });
-        
+         // start menu scene when menu button is being pressed/clicked
+        this.mButton.on('pointerdown', (pointer, gameObject, event) => {
+            this.scene.start("menuScene");
+           
+        });
        
     }
       
     update() {
-        // start menu scene when menu button is being pressed/clicked
-          this.mButton.on('pointerdown', (pointer, gameObject, event) => {
-             this.scene.start("menuScene");
-            
-         });
+     
      
     }
 }
