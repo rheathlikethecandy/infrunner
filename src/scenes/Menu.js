@@ -21,7 +21,6 @@ class Menu extends Phaser.Scene {
         // this.load.image('backDrop', './assets/backDrop.png');
         // //image for menue background **PLACEHOLDER FOR NOW
         // this.load.image('menu', './assets/infMenu.png');
-   
     }
     create() {
         let centerX = game.config.width/2;
@@ -79,25 +78,24 @@ class Menu extends Phaser.Scene {
         this.cButton.setInteractive({
             useHandCursor: true,
         });
-      
-       
-    }
-      
-    update() {
-          // start play scene when menu button is being pressed/clicked
-          this.pButton.on('pointerdown', (pointer, gameObject, event) => {
-             this.menuM.volume = 0;
-            this.scene.start("playScene");
-            //this.scene.start("endScene");
-         });
-         this.cButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.scene.start("creditScene");
-           // this.scene.start("playScene");
+        // start play scene when menu button is being pressed/clicked
+        this.pButton.on('pointerdown', (pointer, gameObject, event) => {
+            this.menuM.volume = 0;
+           this.scene.start("playScene");
+           //this.scene.start("endScene");
+        });
+        this.cButton.on('pointerdown', (pointer, gameObject, event) => {
+           this.scene.start("creditScene");
+          // this.scene.start("playScene");
         });
         this.htpButton.on('pointerdown', (pointer, gameObject, event) => {
-            this.scene.start("howScene");
-           // this.scene.start("playScene");
+           this.scene.start("howScene");
+          // this.scene.start("playScene");
         });
+       
+    }
+    update() {
+          
 
     }
 }
