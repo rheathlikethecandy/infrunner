@@ -17,7 +17,6 @@ class End extends Phaser.Scene {
         this.endM.play();
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
-
         //creating a menu button to move to the play scene
         this.endBack = this.add.tileSprite(0,0,game.config.width,game.config.height,'endBackground').setOrigin(0,0);
         this.eButton = this.add.image(centerX-158,centerY+183,'restartButton').setOrigin(0.5,0.5);
@@ -38,6 +37,14 @@ class End extends Phaser.Scene {
             this.endM.volume = 0;
             this.scene.start("menuScene");
         });
+        this.scoreDisplay = this.add.text(300, 260, '0', {
+            fontFamily: 'Arial Black',
+            fontSize: 40,
+            color: '#ff6ec7',
+            stroke: '#000000',
+            strokeThickness: 4,
+        });
+        this.scoreDisplay.setText("" + this.score);
         console.log(this.score);
     }
       
