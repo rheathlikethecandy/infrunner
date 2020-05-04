@@ -34,9 +34,6 @@ class Play extends Phaser.Scene {
         //player
         this.player = new Player(this, 50, 300, 'spriteSheet',0).setOrigin(0.5,0.5);
 
-        /*this.obstacles = this.physics.add.group();
-        this.buildings = this.physics.add.staticGroup();*/
-
         this.building1 = new Building(this, 0, 400, 'building',0);
         this.building2 = new Building(this, 600, 300, 'building',0);
         this.building3 = new Building(this, -500, 500, 'building',0);
@@ -66,8 +63,8 @@ class Play extends Phaser.Scene {
         });
 
         this.cop1 = new Cop(this, 900, 200, 'copsprite');
-        this.cop2 = new Cop(this, 950, 300, 'copsprite');
-        this.cop3 = new Cop(this, 925, 250, 'copsprite');
+        this.cop2 = new Cop(this, 1000, 300, 'copsprite');
+        this.cop3 = new Cop(this, 1300, 250, 'copsprite');
         this.cops = [
             this.cop1,
             this.cop2,
