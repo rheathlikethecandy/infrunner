@@ -43,14 +43,33 @@ class Play extends Phaser.Scene {
             this.building3
         ];
 
-        this.box1 = new JumpObstacle(this, 100, 200, 'jumpObs');
-        this.box2 = new JumpObstacle(this, 575, 300, 'jumpObs');
-        this.box3 = new JumpObstacle(this, 1150, 100, 'jumpObs');
+        this.box1 = new JumpObstacle(this, 100, 209, 'jumpObs');
+        this.box2 = new JumpObstacle(this, 575, 309, 'jumpObs');
+        this.box3 = new JumpObstacle(this, 1150, 259, 'jumpObs');
         this.boxes = [
             this.box1,
             this.box2,
             this.box3
-        ]
+        ];
+        game.anims.create({
+            key: 'copjet',
+            frameRate: 10,
+            repeat: 1,
+            frames: this.game.anims.generateFrameNumbers('copSprite',
+            {
+                start: 0,
+                end: 1
+            }),
+        });
+
+        this.cop1 = new Cop(this, 900, 200, 'copsprite');
+        this.cop2 = new Cop(this, 950, 300, 'copsprite');
+        this.cop3 = new Cop(this, 925, 250, 'copsprite');
+        this.cops = [
+            this.cop1,
+            this.cop2,
+            this.cop3
+        ];
 
         // variables
         this.timer = Phaser.Time.TimerEvent;
@@ -90,6 +109,8 @@ class Play extends Phaser.Scene {
         this.player.play('run');
         
         this.physics.add.collider(this.player, this.buildings);
+        this.physics.add.collider(this.player, this.boxes);
+        this.physics.add.collider(this.player, this.cops);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
     }
 
@@ -103,12 +124,16 @@ class Play extends Phaser.Scene {
         }
 
         for(var i = 0; i < 2; i++) {
-            var randY = (Math.random() * 225) + 50;
+            var randY = (Math.random() * 100) + 200;
             if((this.buildings[i].x + 468) < 0) {
                 this.buildings[i].setX(900);
                 this.buildings[i].setY(randY);
-                this.boxes[i].setY(randY);
+                this.boxes[i].setY(randY - 91);
                 this.boxes[i].setX(900 + (Math.random() * 200));
+            }
+            if(this.cops[i].x + 10 < 0) {
+                this.cops[i].x = 900 + (Math.random() * 70);
+                this.cops[i].y = (Math.random() * 300);
             }
         }
         if(this.player.getDead()) {
