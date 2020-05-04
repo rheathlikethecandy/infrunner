@@ -4,6 +4,7 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
 
         var jumpKey =  Phaser.Input.Keyboard.Key;
+        var fallKey = Phaser.Input.Keyboard.Key;
         var isDead = false;
         var jumps = 2;
         this.setScale(0.4);
@@ -14,6 +15,9 @@ class Player extends Phaser.GameObjects.Sprite {
 
         this.jumpKey = this.scene.input.keyboard.addKey(
             Phaser.Input.Keyboard.KeyCodes.SPACE
+        );
+        this.fallKey = this.scene.input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.DOWN
         );
         //add object 
         scene.add.existing(this);
@@ -43,6 +47,9 @@ class Player extends Phaser.GameObjects.Sprite {
         console.log(this.jumps);
         if(this.body.touching.down) {
             this.jumps = 2;
+        }
+        if(this.fallKey.isDown) {
+            this.body.setVelocityY(200);
         }
         if(this.jumpKey.isDown && this.jumps > 0) {
             this.jump();

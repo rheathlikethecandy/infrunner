@@ -35,8 +35,8 @@ class Play extends Phaser.Scene {
         this.buildings = this.physics.add.staticGroup();*/
 
         this.building1 = new Building(this, 0, 400, 'building',0);
-        this.building2 = new Building(this, 800, 300, 'building',0);
-        this.building3 = new Building(this, 1600, 500, 'building',0);
+        this.building2 = new Building(this, 600, 300, 'building',0);
+        this.building3 = new Building(this, -500, 500, 'building',0);
         this.buildings = [
             this.building1,
             this.building2,
@@ -44,8 +44,8 @@ class Play extends Phaser.Scene {
         ];
 
         this.box1 = new JumpObstacle(this, 300, 345, 'jumpObs');
-        this.box2 = new JumpObstacle(this, 950, 245, 'jumpObs');
-        this.box3 = new JumpObstacle(this, 1700, 445, 'jumpObs');
+        this.box2 = new JumpObstacle(this, 850, 245, 'jumpObs');
+        this.box3 = new JumpObstacle(this, -500, 445, 'jumpObs');
         this.boxes = [
             this.box1,
             this.box2,
@@ -112,6 +112,13 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.boxes);
         this.physics.add.collider(this.player, this.cops);
         this.physics.add.overlap(this.player, this.obstacles, this.onHit, null, this);
+
+        this.timer = this.time.addEvent({
+            delay: 500,
+            callback: this.spawnBuildings,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     update() {
@@ -123,19 +130,6 @@ class Play extends Phaser.Scene {
             this.player.update();
         }
 
-        for(var i = 0; i < 2; i++) {
-            var randY = (Math.random() * 200) + 300;
-            if((this.buildings[i].x + 468) < 0) {
-                this.buildings[i].setX(900);
-                this.buildings[i].setY(randY);
-                this.boxes[i].setY(randY - 91);
-                this.boxes[i].setX(900 + (Math.random() * 200));
-            }
-            if(this.cops[i].x + 34 < 0) {
-                this.cops[i].x = 900 + (Math.random() * 70);
-                this.cops[i].y = (Math.random() * 300);
-            }
-        }
         if(this.player.getDead()) {
             this.playM.volume = 0;
             this.score = Math.floor(this.score / 100);
@@ -145,5 +139,20 @@ class Play extends Phaser.Scene {
     updateScore() {
         this.score++;
         this.scoreText.setText("Score: " + Math.floor(this.score / 100));
+    }
+    spawnBuildings() {
+        for(var i = 0; i < 2; i++) {
+            var randY = (Math.random() * 100) + 400;
+            if((this.buildings[i].x + 468) < 0) {
+                this.buildings[i].setX(900);
+                this.buildings[i].setY(randY);
+                this.boxes[i].setY(randY - 55);
+                this.boxes[i].setX(900 + (Math.random() * 200));
+            }
+            if(this.cops[i].x + 34 < 0) {
+                this.cops[i].x = 900 + (Math.random() * 70);
+                this.cops[i].y = (Math.random() * 300);
+            }
+        }
     }
 }
