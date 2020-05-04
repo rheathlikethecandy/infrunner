@@ -4,6 +4,7 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
 
         var jumpKey =  Phaser.Input.Keyboard.Key;
+        var fallKey = Phaser.Input.Keyboard.Key;
         var isDead = false;
         var jumps = 2;
         
@@ -16,10 +17,15 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpKey = this.scene.input.keyboard.addKey(
             Phaser.Input.Keyboard.KeyCodes.SPACE
         );
+        this.fallKey = this.scene.input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.DOWN
+        );
         //add object 
         scene.add.existing(this);
         //add object to existing scene
+        scene.add.existing(this);
         scene.physics.add.existing(this);
+        
     }
     create() {
       
@@ -28,13 +34,15 @@ class Player extends Phaser.GameObjects.Sprite {
         this.processInput();
         this.outOfBounds(); 
         if(!this.body.touching.down) {
-            
+            this.anims.play('walk', false);
+            this.anims.play('jump', true);
             this.body.setVelocityX(0);
             
         }
         else { 
-            this.body.setVelocityX(220);
-           
+            this.anims.play('jump', false);
+            this.anims.play('walk', true);
+            this.body.setVelocityX(250);
         }
     }
 
@@ -44,6 +52,9 @@ class Player extends Phaser.GameObjects.Sprite {
             this.jumps = 2;
             this.anims.play('run',true);
             
+        }
+        if(this.fallKey.isDown) {
+            this.body.setVelocityY(200);
         }
         if(this.jumpKey.isDown && this.jumps > 0) {
             this.jump();
@@ -59,7 +70,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
     
     outOfBounds() {
-        if (this.y + this.height > this.scene.sys.canvas.height || this.x + this.width < 0) {
+        if (this.y > 600 || this.x + this.width < 0) {
             this.isDead = true;
         }
     }
