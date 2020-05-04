@@ -30,27 +30,8 @@ class Menu extends Phaser.Scene {
         this.menuM.play();
         //background
         this.menuBack = this.add.tileSprite(0,0,900,600,'menuBackground').setOrigin(0,0);
-        //play bgm
-        /*var bgmNum = Math.floor(Math.random() * Math.floor(3));
-
-        if(bgmNum == 0){
-        this.bgm = game.sound.add('bgm_1');
-        this.bgm.setLoop(loop);
-        this.bgm.play();
-       }else if(bgmNum == 1){
-        this.bgm = game.sound.add('bgm_2');
-        this.bgm.setLoop(loop);
-        this.bgm.play();
-       }
-       else if(bgmNum == 2){
-        this.bgm = game.sound.add('bgm_3');
-        this.bgm.setLoop(loop);
-        this.bgm.play();
-       }*/
-        //define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-
+      
+        
         //place holder title
         let menuConfig= {
             frontFamily: 'Courier',
