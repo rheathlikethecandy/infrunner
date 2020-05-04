@@ -49,7 +49,7 @@ class Play extends Phaser.Scene {
             this.box1,
             this.box2,
             this.box3
-        ]
+        ];
 
         // variables
         this.timer = Phaser.Time.TimerEvent;
@@ -102,7 +102,7 @@ class Play extends Phaser.Scene {
         }
 
         for(var i = 0; i < 2; i++) {
-            var randY = (Math.random() * 225) + 50;
+            var randY = (Math.random() * 100) + 200;
             if((this.buildings[i].x + 468) < 0) {
                 this.buildings[i].setX(900);
                 this.buildings[i].setY(randY);
